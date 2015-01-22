@@ -92,4 +92,16 @@ public class Palikka {
         
         return new LisaPala(x, y, ksuunta, pala);
     }
+    
+    private void kaannaVastapaivaan() {
+        //uusi lista paloja, lisää pääpala
+        for (int i = 1; i < palat.size() - 1; i++) {
+            LisaPala pala = (LisaPala) palat.get(i);
+            pala.kaannaVastapaivaan();
+            //lisää uuteen listaan
+        }
+        //palat = uudetPalat;
+                
+        
+    }
 }

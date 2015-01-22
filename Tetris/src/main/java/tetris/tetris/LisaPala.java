@@ -5,6 +5,11 @@
  */
 package tetris.tetris;
 
+import static tetris.tetris.Kiinnityssuunta.ALA;
+import static tetris.tetris.Kiinnityssuunta.OIKEA;
+import static tetris.tetris.Kiinnityssuunta.VASEN;
+import static tetris.tetris.Kiinnityssuunta.YLA;
+
 /**
  *
  * @author kkerokos
@@ -23,7 +28,25 @@ public class LisaPala extends Pala {
         return ksuunta;
     }
     
-    public void siirra() {
+    public void kaannaVastapaivaan() {
+        int uusiX = this.pala.getX();
+        int uusiY = this.pala.getY();
         
+        
+        //korjaa nämä - käännä palaa ja vaihda suunta
+        if (ksuunta == OIKEA) {
+            uusiX++;
+        }
+        if (ksuunta == VASEN) {
+            uusiX -= 1;
+        }
+        if (ksuunta == YLA) {
+            uusiY++;
+        }
+        if (ksuunta == ALA) {
+            uusiY -= 1;
+        }
+        
+        this.siirra(uusiX, uusiY);
     }
 }

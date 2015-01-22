@@ -30,4 +30,5 @@ public class Pala {
     public int getY() {
         return this.y;
     }
+    
 }
