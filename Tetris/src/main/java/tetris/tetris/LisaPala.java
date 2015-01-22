@@ -35,16 +35,20 @@ public class LisaPala extends Pala {
         
         //korjaa nämä - käännä palaa ja vaihda suunta
         if (ksuunta == OIKEA) {
-            uusiX++;
+            ksuunta = YLA;
+            uusiY -= 1;
         }
         if (ksuunta == VASEN) {
-            uusiX -= 1;
+            ksuunta = ALA;
+            uusiY -= 1;
         }
         if (ksuunta == YLA) {
-            uusiY++;
+            ksuunta = VASEN;
+            uusiX -= 1;
         }
         if (ksuunta == ALA) {
-            uusiY -= 1;
+            ksuunta = OIKEA;
+            uusiX++;
         }
         
         this.siirra(uusiX, uusiY);

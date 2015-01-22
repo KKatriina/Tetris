@@ -20,6 +20,8 @@ public class Palikka {
     private PaaPala paaPala;
     private Random random;
     
+   
+    
     public Palikka() {
         this.palat = new ArrayList<Pala>();
         this.random = new Random();
@@ -30,6 +32,12 @@ public class Palikka {
         luoPalat(paaPala, lisaPaloja);
     }
     
+    public Palikka(List<Pala> palat, PaaPala paaPala) {
+        this.random = new Random();
+        this.palat = palat;
+        this.paaPala = paaPala;
+    } 
+    
     public boolean osuuko(List<Pala> palat, Pala pala) {
         for (Pala p : palat) {
             if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
@@ -39,7 +47,7 @@ public class Palikka {
         return false;
     }
 
-    private void luoPalat(Pala paaPala, int lisaPaloja) {
+    public void luoPalat(Pala paaPala, int lisaPaloja) {
         this.palat.add(paaPala);
         
         int i = 1;
@@ -61,7 +69,7 @@ public class Palikka {
 
     }       
     
-    private Kiinnityssuunta selvitaKiinnityssuunta(int suunta) {
+    public Kiinnityssuunta selvitaKiinnityssuunta(int suunta) {
         if (suunta == 1) {
             return OIKEA;
         }
@@ -74,7 +82,7 @@ public class Palikka {
         return ALA;
     }
 
-    private Pala luoLisaPala(Kiinnityssuunta ksuunta, Pala pala) {
+    public Pala luoLisaPala(Kiinnityssuunta ksuunta, Pala pala) {
         int x = pala.getX();
         int y = pala.getY();
         if (ksuunta == OIKEA) {
@@ -93,15 +101,27 @@ public class Palikka {
         return new LisaPala(x, y, ksuunta, pala);
     }
     
-    private void kaannaVastapaivaan() {
-        //uusi lista paloja, lisää pääpala
-        for (int i = 1; i < palat.size() - 1; i++) {
+    public void kaannaVastapaivaan() {
+        //tama ei viela ota huomioon seiniin tormaamista
+        List<Pala> uudetPalat = new ArrayList<Pala>();
+        uudetPalat.add(paaPala);
+        
+        for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
             pala.kaannaVastapaivaan();
-            //lisää uuteen listaan
-        }
-        //palat = uudetPalat;
-                
+            uudetPalat.add(pala);
+        } 
         
+        palat = uudetPalat;
     }
+    
+    public Pala getPaaPala() {
+        return paaPala;
+    }
+    
+    public List<Pala> getPalat() {
+        return palat;
+    }
+    
+    
 }
