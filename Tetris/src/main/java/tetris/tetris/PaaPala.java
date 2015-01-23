@@ -14,6 +14,8 @@ public class PaaPala extends Pala {
     public PaaPala(int x, int y) {
         super(x, y);
     }
+    
+    //taa taitaakin olla turha luokka
 
     
     

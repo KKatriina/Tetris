@@ -101,8 +101,54 @@ public class Palikka {
         return new LisaPala(x, y, ksuunta, pala);
     }
     
+    public void siirra(Kiinnityssuunta suunta) {
+        if (osuukoSeinaan(suunta)) {
+                return;
+        }
+        for (Pala p : palat) {
+            p.siirra(suunta);
+        }
+    }
+    
+    private boolean osuukoSeinaan(Kiinnityssuunta suunta) {
+        return osuukoSeinaan(suunta, this.palat);
+    }
+
+    private boolean osuukoSeinaan(Kiinnityssuunta suunta, List<Pala> palat) {
+        if (suunta == OIKEA) {
+            for (Pala p : palat) {
+                if (p.getX() >= 10) {
+                    return true;
+                }
+            }
+        }
+        if (suunta == VASEN) {
+            for (Pala p : palat) {
+                if (p.getX() <= 0) {
+                    return true;
+                }
+            }
+        }
+        if (suunta == ALA) {
+            for (Pala p : palat) {
+                if (p.getY() >= 20) {
+                    return true;
+                }
+            }
+        }
+        if (suunta == YLA) {
+            for (Pala p : palat) {
+                if (p.getY() <= 0) {
+                    return true;
+                }
+                       
+            }
+        }
+        return false;
+    }
+    
     public void kaannaVastapaivaan() {
-        //tama ei viela ota huomioon seiniin tormaamista
+        
         List<Pala> uudetPalat = new ArrayList<Pala>();
         uudetPalat.add(paaPala);
         
@@ -110,7 +156,34 @@ public class Palikka {
             LisaPala pala = (LisaPala) palat.get(i);
             pala.kaannaVastapaivaan();
             uudetPalat.add(pala);
-        } 
+        }
+        
+        if (osuukoSeinaan(ALA, uudetPalat)) {
+            return;
+        }
+        
+       
+        while (true) {
+            if (!osuukoSeinaan(YLA, uudetPalat) && !(osuukoSeinaan(OIKEA, uudetPalat)) && !(osuukoSeinaan(VASEN, uudetPalat))) {
+                break;
+            }
+            if (osuukoSeinaan(YLA, uudetPalat)) {
+                for (Pala p : uudetPalat) {
+                    siirra(ALA);
+                }
+            }
+            if (osuukoSeinaan(OIKEA, uudetPalat)) {
+                for (Pala p : uudetPalat) {
+                    siirra(VASEN);
+                }
+            }
+            if (osuukoSeinaan(VASEN, uudetPalat)) {
+                for (Pala p  : uudetPalat) {
+                    siirra(OIKEA);
+                }
+                    
+            }
+        }
         
         palat = uudetPalat;
     }

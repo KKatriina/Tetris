@@ -13,6 +13,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
+import static tetris.tetris.Kiinnityssuunta.VASEN;
 import tetris.tetris.LisaPala;
 import tetris.tetris.PaaPala;
 import tetris.tetris.Pala;
@@ -26,6 +27,7 @@ public class Test1 {
     Palikka palikka;
     PaaPala pala1;
     LisaPala pala2;
+    LisaPala pala3;
     List<Pala> palat;
     
     public Test1() {
@@ -35,12 +37,14 @@ public class Test1 {
     
     @Before
     public void setUp() {
-        pala1 = new PaaPala(1, 5);
-        pala2 = new LisaPala(1, 6, ALA, pala1);
+        pala1 = new PaaPala(2, 5);
+        pala2 = new LisaPala(2, 6, ALA, pala1);
+        pala3 = new LisaPala(1, 6, VASEN, pala2);
         palat = new ArrayList<Pala>();
         palat.add(pala1);
         palat.add(pala2);
         palikka = new Palikka(palat, pala1);
+        
     }
     
     @Test
@@ -77,7 +81,7 @@ public class Test1 {
     @Test
     public void LisaPalanKaantyessaKoordinaatitOikein() {
         pala2.kaannaVastapaivaan();
-        assertEquals(2, pala2.getX());
+        assertEquals(3, pala2.getX());
         assertEquals(5, pala2.getY());
     }
     
@@ -85,9 +89,51 @@ public class Test1 {
     public void kahdenPalanPalikkaKaantyyOikein() {
         palikka.kaannaVastapaivaan();
         assertEquals(OIKEA, pala2.getKiinnityssuunta());
-        assertEquals(2, pala2.getX());
+        assertEquals(3, pala2.getX());
         assertEquals(5, pala2.getY());
     }
+    
+    @Test
+    public void osuukoAntaaOikeinTruen() {
+        assertEquals(palikka.osuuko(palat, pala1), true);
+    }
+    
+    @Test
+    public void osuukoAntaaOikeinFalsen() {
+        assertEquals(palikka.osuuko(palat, pala3), false);
+    }
+    
+    @Test
+    public void isompiPalikkaKaantyyOikein() {
+        //tama seuraavaksi...
+    }
+    
+    @Test
+    public void luoLisapalaToimiiOikein() {
+        //tama sitten
+    }
+    
+    @Test
+    public void palaSiirtyyOikeinKunParametrinaSuunta() {
+        
+    }
+    
+    @Test
+    public void kaannyVastapaivaanEiTeeMitaanJosOsutaanAlareunaan() {
+        
+    }
+    
+    @Test
+    public void kaannyVastapaivaanToimiiJosTormataanSeiniin() {
+        
+    }
+    
+    
+    @Test
+    public void osuukoSeinaanToimiiOikein() {
+        
+    }
+    
     
     
     
