@@ -36,7 +36,7 @@ public class Palikka {
         this.random = new Random();
         this.palat = palat;
         this.paaPala = paaPala;
-    } 
+    }
     
     public boolean osuuko(List<Pala> palat, Pala pala) {
         for (Pala p : palat) {
@@ -148,16 +148,17 @@ public class Palikka {
     }
     
     public void kaannaVastapaivaan() {
-        
         List<Pala> uudetPalat = new ArrayList<Pala>();
         uudetPalat.add(paaPala);
         
         for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
+            pala.asetaUusiPaaPala(uudetPalat.get(i - 1));
             pala.kaannaVastapaivaan();
             uudetPalat.add(pala);
         }
         
+        //jos osuu alareunaan, ei saa kaantya
         if (osuukoSeinaan(ALA, uudetPalat)) {
             return;
         }

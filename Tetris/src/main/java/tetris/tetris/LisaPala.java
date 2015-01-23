@@ -25,32 +25,38 @@ public class LisaPala extends Pala {
     }
     
     public Kiinnityssuunta getKiinnityssuunta() {
-        return ksuunta;
+        return this.ksuunta;
     }
+    
+    public void asetaUusiPaaPala(Pala pala) {
+        this.pala = pala;
+    }
+    
     
     public void kaannaVastapaivaan() {
         int uusiX = this.pala.getX();
         int uusiY = this.pala.getY();
         
         
-        //korjaa nämä - käännä palaa ja vaihda suunta
-        if (ksuunta == OIKEA) {
-            ksuunta = YLA;
+        
+        if (this.ksuunta == OIKEA) {
+            this.ksuunta = YLA;
             uusiY -= 1;
-        }
-        if (ksuunta == VASEN) {
-            ksuunta = ALA;
-            uusiY -= 1;
-        }
-        if (ksuunta == YLA) {
-            ksuunta = VASEN;
+        } else if (this.ksuunta == VASEN) {
+            this.ksuunta = ALA;
+            uusiY += 1;
+        } else if (this.ksuunta == YLA) {
+            this.ksuunta = VASEN;
             uusiX -= 1;
-        }
-        if (ksuunta == ALA) {
-            ksuunta = OIKEA;
+        } else {
+            this.ksuunta = OIKEA;
             uusiX++;
         }
         
         this.siirra(uusiX, uusiY);
+    }
+    
+    public Pala getPaaPala() {
+        return this.pala;
     }
 }

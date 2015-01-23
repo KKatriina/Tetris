@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
 import static tetris.tetris.Kiinnityssuunta.VASEN;
+import static tetris.tetris.Kiinnityssuunta.YLA;
 import tetris.tetris.LisaPala;
 import tetris.tetris.PaaPala;
 import tetris.tetris.Pala;
@@ -24,11 +25,15 @@ import tetris.tetris.Palikka;
  * @author kkerokos
  */
 public class Test1 {
+    
+    //miksi pit ei toimi?
+    
     Palikka palikka;
     PaaPala pala1;
     LisaPala pala2;
     LisaPala pala3;
     List<Pala> palat;
+
     
     public Test1() {
     }
@@ -44,6 +49,7 @@ public class Test1 {
         palat.add(pala1);
         palat.add(pala2);
         palikka = new Palikka(palat, pala1);
+
         
     }
     
@@ -105,12 +111,29 @@ public class Test1 {
     
     @Test
     public void isompiPalikkaKaantyyOikein() {
-        //tama seuraavaksi...
+        PaaPala pala4 = new PaaPala(3, 4);
+        LisaPala pala5 = new LisaPala(3, 5, ALA, pala4);
+        LisaPala pala6 = new LisaPala(2, 5, VASEN, pala5);
+        List<Pala> palat2 = new ArrayList<Pala>();
+        palat2.add(pala4);
+        palat2.add(pala5);
+        palat2.add(pala6);
+        Palikka palikka2 = new Palikka(palat2, pala4);
+        palikka2.kaannaVastapaivaan();
+        assertEquals(OIKEA, pala5.getKiinnityssuunta());
+        assertEquals(4, pala5.getX());
+        assertEquals(4, pala5.getY());
+        assertEquals(ALA, pala6.getKiinnityssuunta());
+        assertEquals(4, pala6.getX());
+        assertEquals(5, pala6.getY());        
     }
+    
+
+        
     
     @Test
     public void luoLisapalaToimiiOikein() {
-        //tama sitten
+        
     }
     
     @Test
