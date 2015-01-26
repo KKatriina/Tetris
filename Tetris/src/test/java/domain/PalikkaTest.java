@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package domain;
 
 import java.util.*;
 import org.junit.After;
@@ -15,16 +16,16 @@ import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
 import static tetris.tetris.Kiinnityssuunta.VASEN;
 import static tetris.tetris.Kiinnityssuunta.YLA;
-import tetris.tetris.LisaPala;
-import tetris.tetris.PaaPala;
-import tetris.tetris.Pala;
-import tetris.tetris.Palikka;
+import domain.LisaPala;
+import domain.PaaPala;
+import domain.Pala;
+import domain.Palikka;
 
 /**
  *
  * @author kkerokos
  */
-public class Test1 {
+public class PalikkaTest {
     
     //miksi pit ei toimi?
     
@@ -35,7 +36,7 @@ public class Test1 {
     List<Pala> palat;
 
     
-    public Test1() {
+    public PalikkaTest() {
     }
     
 
@@ -71,25 +72,6 @@ public class Test1 {
         
     }
     
-    @Test
-    public void palaSiirtyyOikein() {
-        pala1.siirra(3, 4);
-        assertEquals(pala1.getX(), 3);
-        assertEquals(pala1.getY(), 4);
-    }
-    
-    @Test
-    public void LisaPalanKaantyessaSuunnatOikein() {
-        pala2.kaannaVastapaivaan();
-        assertEquals(OIKEA, pala2.getKiinnityssuunta());
-    }
-    
-    @Test
-    public void LisaPalanKaantyessaKoordinaatitOikein() {
-        pala2.kaannaVastapaivaan();
-        assertEquals(3, pala2.getX());
-        assertEquals(5, pala2.getY());
-    }
     
     @Test
     public void kahdenPalanPalikkaKaantyyOikein() {
@@ -157,14 +139,4 @@ public class Test1 {
         
     }
     
-    
-    
-    
-    
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

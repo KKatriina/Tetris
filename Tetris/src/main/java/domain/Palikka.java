@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.tetris;
+package domain;
+import domain.LisaPala;
+import domain.Pala;
 import java.util.*;
+import tetris.tetris.Kiinnityssuunta;
 import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
 import static tetris.tetris.Kiinnityssuunta.VASEN;
 import static tetris.tetris.Kiinnityssuunta.YLA;
-import tetris.tetris.PaaPala;
+import domain.PaaPala;
 
 /**
  *
