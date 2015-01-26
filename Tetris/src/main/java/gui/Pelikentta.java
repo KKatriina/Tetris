@@ -5,6 +5,8 @@
  */
 package gui;
 
+import domain.Pala;
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import peli.Tetris;
@@ -29,5 +31,17 @@ public class Pelikentta extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        //olisi hauskaa, jos palat eri värisiä - staattinen muuttuja "Vari"? katsotaan myöhemmin
+        
+        g.setColor(Color.blue);
+        
+        for (Pala p : this.peli.getPalikka().getPalat()) {
+            g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
+        }
+        
+        for (Pala p : this.peli.getPohjanPalat()) {
+            g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
+        }
     }
 }
