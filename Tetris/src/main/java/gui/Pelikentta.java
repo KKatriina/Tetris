@@ -5,10 +5,29 @@
  */
 package gui;
 
+import java.awt.Graphics;
+import javax.swing.JPanel;
+import peli.Tetris;
+
 /**
  *
  * @author kkerokos
  */
-public class Pelikentta {
+public class Pelikentta extends JPanel {
+    private Tetris peli;
+    private int sivunPituus;
     
+    public Pelikentta(Tetris peli, int sivunPituus) {
+        this.peli = peli;
+        this.sivunPituus = sivunPituus;
+    }
+    
+    public void paivita() {
+        this.repaint();
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
 }

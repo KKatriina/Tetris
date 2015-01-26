@@ -5,10 +5,13 @@
  */
 package peli;
 
+import java.util.Timer;
+
 /**
  *
  * @author kkerokos
  */
-public class Tetris {
+public class Tetris extends Timer {
+
     
 }
