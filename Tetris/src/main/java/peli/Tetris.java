@@ -24,14 +24,16 @@ public class Tetris extends Timer implements ActionListener {
     private int leveys;
     private int korkeus;
     private Pelikentta kentta;
+    private int sivunPituus;
     
-    public Tetris(int leveys, int korkeus) {
+    public Tetris(int leveys, int korkeus, int sivunPituus) {
         super(1000, null);
         
         this.palikka = new Palikka();
         this.pohjanPalat = new ArrayList<Pala>();
         this.leveys = leveys;
         this.korkeus = korkeus;
+        this.sivunPituus = sivunPituus;
         
         addActionListener(this);
         setInitialDelay(2000);
@@ -62,21 +64,21 @@ public class Tetris extends Timer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        palikka.siirra(Kiinnityssuunta.ALA);
+        this.palikka.siirra(Kiinnityssuunta.ALA);
         
         //jos pala osuu alareunaan TAI toiseen palaan, luodaan uusi pala
-        
-        int pohjassaKiinni = 0;
-        for (Pala p : pohjanPalat) {
-            if (p.getX() == this.korkeus) {
-                pohjassaKiinni++;
+        if (osuuPohjaan(this.palikka, this.pohjanPalat)) {
+            for (Pala p : palikka.getPalat()) {
+                this.pohjanPalat.add(p);
             }
-                    
+            this.palikka = new Palikka();
+            
         }
         
-        if (pohjassaKiinni == this.leveys) {
+        
+        if (pohjaTaynna()) {
             for (Pala p : pohjanPalat) {
-                if (p.getX() == this.korkeus) {
+                if (p.getX() >= this.korkeus - this.sivunPituus) {
                     pohjanPalat.remove(p);
                 } else {
                     p.siirra(Kiinnityssuunta.ALA);
@@ -86,6 +88,40 @@ public class Tetris extends Timer implements ActionListener {
 
         kentta.paivita();
     }
+
+    public boolean osuuPohjaan(Palikka palikka, List<Pala> pohjanPalat) {
+       
+        
+        for (Pala p : this.palikka.getPalat()) {
+            if (p.getX() >= (this.korkeus - this.sivunPituus)) {
+                return true;
+            }
+            
+            if (this.palikka.osuuko(pohjanPalat, p)) {
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    
+    public boolean pohjaTaynna() {
+        int pohjassaKiinni = 0;
+        for (Pala p : pohjanPalat) {
+            if (p.getX() >= (this.korkeus - this.sivunPituus)) {
+                pohjassaKiinni++;
+            }
+                    
+        }
+        
+        if (pohjassaKiinni == this.leveys) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     
     
     

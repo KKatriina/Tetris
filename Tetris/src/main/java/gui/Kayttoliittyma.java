@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domain.Palikka;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ public class Kayttoliittyma implements Runnable {
     private Tetris peli;
     private int sivunPituus;
     private Pelikentta kentta;
+    private Nappaimistonkuuntelija nk;
     
     public Kayttoliittyma(Tetris peli, int sivunPituus) {
         this.peli = peli;
@@ -30,8 +32,8 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Tetris!");
-        int leveys = (peli.getLeveys() + 1) * sivunPituus + 10;
-        int korkeus = (peli.getKorkeus() + 2) * sivunPituus + 10;
+        int leveys = (peli.getLeveys()) * sivunPituus;
+        int korkeus = (peli.getKorkeus()) * sivunPituus;
  
         frame.setPreferredSize(new Dimension(leveys, korkeus));
  
@@ -48,12 +50,18 @@ public class Kayttoliittyma implements Runnable {
         
         container.add(kentta);
         
-        Nappaimistonkuuntelija nk = new Nappaimistonkuuntelija(peli.getPalikka());
+        nk = new Nappaimistonkuuntelija(peli);
         getFrame().addKeyListener(nk);
     }
 
-    private JFrame getFrame() {
+    public JFrame getFrame() {
         return frame;
     }
+    
+    public Pelikentta getKentta() {
+        return this.kentta;
+    }
+    
+    
     
 }

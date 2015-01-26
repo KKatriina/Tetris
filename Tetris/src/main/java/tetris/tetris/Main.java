@@ -6,6 +6,9 @@
 package tetris.tetris;
 
 import domain.Palikka;
+import gui.Kayttoliittyma;
+import javax.swing.SwingUtilities;
+import peli.Tetris;
 
 /**
  *
@@ -17,7 +20,22 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Palikka a = new Palikka();
+        Tetris peli = new Tetris(10, 20, 20);
+        Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
+        SwingUtilities.invokeLater(kali);
+        
+
+        while (kali.getKentta() == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                System.out.println("Pelikenttä puuttuu!");
+            }
+        }
+ 
+        peli.setPelikentta(kali.getKentta());
+        peli.start();
+       
        
     }
     

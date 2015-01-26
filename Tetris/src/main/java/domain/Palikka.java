@@ -42,6 +42,7 @@ public class Palikka {
     }
     
     public boolean osuuko(List<Pala> palat, Pala pala) {
+        //tää ei taida olla oikeassa luokassa
         for (Pala p : palat) {
             if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
                 return true;
@@ -58,7 +59,7 @@ public class Palikka {
             int suunta = random.nextInt(4);
             Kiinnityssuunta ksuunta = selvitaKiinnityssuunta(suunta);
 
-            int indeksi = random.nextInt(palat.size() - 1);
+            int indeksi = random.nextInt(palat.size());
             Pala kiinnitysPala = palat.get(indeksi);
             
             Pala uusiPala = luoLisaPala(ksuunta, kiinnitysPala);
