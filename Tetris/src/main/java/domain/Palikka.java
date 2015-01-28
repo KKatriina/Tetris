@@ -12,7 +12,7 @@ import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
 import static tetris.tetris.Kiinnityssuunta.VASEN;
 import static tetris.tetris.Kiinnityssuunta.YLA;
-import domain.PaaPala;
+
 
 /**
  *
@@ -20,7 +20,7 @@ import domain.PaaPala;
  */
 public class Palikka {
     private List<Pala> palat;
-    private PaaPala paaPala;
+    private Pala paaPala;
     private Random random;
     
    
@@ -30,12 +30,12 @@ public class Palikka {
         this.random = new Random();
         int lisaPaloja = random.nextInt(4);
         
-        this.paaPala = new PaaPala(5, 0);
+        this.paaPala = new Pala(5, 0);
 
         luoPalat(paaPala, lisaPaloja);
     }
     
-    public Palikka(List<Pala> palat, PaaPala paaPala) {
+    public Palikka(List<Pala> palat, Pala paaPala) {
         this.random = new Random();
         this.palat = palat;
         this.paaPala = paaPala;
@@ -51,7 +51,7 @@ public class Palikka {
         return false;
     }
 
-    public void luoPalat(Pala paaPala, int lisaPaloja) {
+    public void luoPalat(Pala pala, int lisaPaloja) {
         this.palat.add(paaPala);
         
         int i = 1;

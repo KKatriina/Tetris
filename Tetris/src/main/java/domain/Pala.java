@@ -28,7 +28,7 @@ public class Pala {
         //tama ei osaa varoa seinia
         if (suunta == OIKEA) {
             siirra(this.x + 1, this.y);
-        }
+        } 
         if (suunta == VASEN) {
             siirra(this.x - 1, this.y);
         }

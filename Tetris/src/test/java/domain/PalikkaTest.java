@@ -17,7 +17,6 @@ import static tetris.tetris.Kiinnityssuunta.OIKEA;
 import static tetris.tetris.Kiinnityssuunta.VASEN;
 import static tetris.tetris.Kiinnityssuunta.YLA;
 import domain.LisaPala;
-import domain.PaaPala;
 import domain.Pala;
 import domain.Palikka;
 
@@ -30,7 +29,7 @@ public class PalikkaTest {
     //miksi pit ei toimi?
     
     Palikka palikka;
-    PaaPala pala1;
+    Pala pala1;
     LisaPala pala2;
     LisaPala pala3;
     List<Pala> palat;
@@ -43,7 +42,7 @@ public class PalikkaTest {
     
     @Before
     public void setUp() {
-        pala1 = new PaaPala(2, 5);
+        pala1 = new Pala(2, 5);
         pala2 = new LisaPala(2, 6, ALA, pala1);
         pala3 = new LisaPala(1, 6, VASEN, pala2);
         palat = new ArrayList<Pala>();
@@ -93,7 +92,7 @@ public class PalikkaTest {
     
     @Test
     public void isompiPalikkaKaantyyOikein() {
-        PaaPala pala4 = new PaaPala(3, 4);
+        Pala pala4 = new Pala(3, 4);
         LisaPala pala5 = new LisaPala(3, 5, ALA, pala4);
         LisaPala pala6 = new LisaPala(2, 5, VASEN, pala5);
         List<Pala> palat2 = new ArrayList<Pala>();

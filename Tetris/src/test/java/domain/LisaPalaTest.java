@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;
 
 /**
@@ -18,6 +19,7 @@ import static tetris.tetris.Kiinnityssuunta.OIKEA;
  * @author kkerokos
  */
 public class LisaPalaTest {
+    Pala pala1;
     LisaPala pala2;
     
     public LisaPalaTest() {
@@ -33,7 +35,8 @@ public class LisaPalaTest {
     
     @Before
     public void setUp() {
-        LisaPala pala2;
+        pala1 = new Pala(2, 5);
+        pala2 = new LisaPala(2, 6, ALA, pala1);
     }
     
     @After
