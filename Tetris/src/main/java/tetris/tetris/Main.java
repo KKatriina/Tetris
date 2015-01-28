@@ -5,10 +5,17 @@
  */
 package tetris.tetris;
 
+import java.util.ArrayList;
+import java.util.List;
 import tetris.domain.Palikka;
 import tetris.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
+import tetris.domain.LisaPala;
+import tetris.domain.Pala;
 import tetris.peli.Tetris;
+import static tetris.tetris.Kiinnityssuunta.ALA;
+import static tetris.tetris.Kiinnityssuunta.OIKEA;
+import static tetris.tetris.Kiinnityssuunta.VASEN;
 
 /**
  *
@@ -20,21 +27,21 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tetris peli = new Tetris(10, 20);
-        Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
-        SwingUtilities.invokeLater(kali);
-        
-
-        while (kali.getKentta() == null) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                System.out.println("Pelikenttä puuttuu!");
-            }
-        }
- 
-        peli.setPelikentta(kali.getKentta());
-        peli.start();
+//        Tetris peli = new Tetris(10, 20);
+//        Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
+//        SwingUtilities.invokeLater(kali);
+//        
+//
+//        while (kali.getKentta() == null) {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException ex) {
+//                System.out.println("Pelikenttä puuttuu!");
+//            }
+//        }
+// 
+//        peli.setPelikentta(kali.getKentta());
+//        peli.start();
        
        
     }

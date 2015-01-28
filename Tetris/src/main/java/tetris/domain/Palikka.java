@@ -120,6 +120,7 @@ public class Palikka {
 
     public boolean osuukoSeinaan(Kiinnityssuunta suunta, List<Pala> palat) {
         boolean palautettava = false;
+        
         if (suunta == OIKEA) {
             for (Pala p : palat) {
                 if (p.getX() > 10) {
@@ -164,8 +165,6 @@ public class Palikka {
         if (osuukoSeinaan(ALA, uudetPalat)) {
             return;
         } else {
-        
-       
             while (true) {
                 if (!osuukoSeinaan(YLA, uudetPalat) && !(osuukoSeinaan(OIKEA, uudetPalat)) && !(osuukoSeinaan(VASEN, uudetPalat))) {
                     break;
