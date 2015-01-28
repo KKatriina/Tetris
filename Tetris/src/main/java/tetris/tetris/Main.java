@@ -20,7 +20,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tetris peli = new Tetris(10, 20, 20);
+        Tetris peli = new Tetris(10, 20);
         Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
         SwingUtilities.invokeLater(kali);
         

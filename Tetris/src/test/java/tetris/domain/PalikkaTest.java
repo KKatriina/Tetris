@@ -60,22 +60,22 @@ public class PalikkaTest {
         assertEquals(palat, palikka.getPalat());
     }
     
-    //@Test
-    //public void palojenJarjestysSailyyKaannyttaessa() {
-    //    palikka.kaannaVastapaivaan();
-    //    assertEquals(pala2, palikka.getPalat().get(1));
-    //    assertEquals(pala1, palikka.getPalat().get(0));
+    @Test
+    public void palojenJarjestysSailyyKaannyttaessa() {
+        palikka.kaannaVastapaivaan();
+        assertEquals(pala2, palikka.getPalat().get(1));
+        assertEquals(pala1, palikka.getPalat().get(0));
         
-    //}
+    }
     
-//    
-//    @Test
-//    public void kahdenPalanPalikkaKaantyyOikein() {
-//        palikka.kaannaVastapaivaan();
-//        assertEquals(OIKEA, pala2.getKiinnityssuunta());
-//        assertEquals(3, pala2.getX());
-//        assertEquals(5, pala2.getY());
-//    }
+    
+    @Test
+    public void kahdenPalanPalikkaKaantyyOikein() {
+        palikka.kaannaVastapaivaan();
+        assertEquals(OIKEA, pala2.getKiinnityssuunta());
+        assertEquals(3, pala2.getX());
+        assertEquals(5, pala2.getY());
+    }
     
     @Test
     public void osuukoAntaaOikeinTruen() {
@@ -87,11 +87,54 @@ public class PalikkaTest {
         assertEquals(palikka.osuuko(palat, pala3), false);
     }
     
+    @Test
+    public void isompiPalikkaKaantyyOikein() {
+        Pala pala4 = new Pala(3, 4);
+        LisaPala pala5 = new LisaPala(3, 5, ALA, pala4);
+        LisaPala pala6 = new LisaPala(2, 5, VASEN, pala5);
+        List<Pala> palat2 = new ArrayList<Pala>();
+        palat2.add(pala4);
+        palat2.add(pala5);
+        palat2.add(pala6);
+        Palikka palikka2 = new Palikka(palat2, pala4);
+        palikka2.kaannaVastapaivaan();
+        assertEquals(OIKEA, pala5.getKiinnityssuunta());
+        assertEquals(4, pala5.getX());
+        assertEquals(4, pala5.getY());
+        assertEquals(ALA, pala6.getKiinnityssuunta());
+        assertEquals(4, pala6.getX());
+        assertEquals(5, pala6.getY());        
+    }
+       
+    
+    @Test
+    public void luoLisapalaToimiiOikein() {
+        LisaPala pala = palikka.luoLisaPala(ALA, pala1);
+        assertEquals(pala1, pala.getPaaPala());
+        assertEquals(ALA, pala.getKiinnityssuunta());
+        assertEquals(2, pala.getX());
+        assertEquals(6, pala.getY());
+    }
+    
 //    @Test
-//    public void isompiPalikkaKaantyyOikein() {
-//        Pala pala4 = new Pala(3, 4);
-//        LisaPala pala5 = new LisaPala(3, 5, ALA, pala4);
-//        LisaPala pala6 = new LisaPala(2, 5, VASEN, pala5);
+//    public void kaannyVastapaivaanEiTeeMitaanJosOsutaanAlareunaan() {
+//        Pala pala4 = new Pala(3, 20);
+//        LisaPala pala5 = new LisaPala(2, 20, VASEN, pala4);
+//        List<Pala> palat2 = new ArrayList<Pala>();
+//        palat2.add(pala4);
+//        palat2.add(pala5);
+//        Palikka palikka2 = new Palikka(palat2, pala4);
+//        palikka2.kaannaVastapaivaan();
+//        assertEquals(VASEN, pala5.getKiinnityssuunta());
+//        assertEquals(2, pala5.getX());
+//        assertEquals(20, pala5.getY()); 
+//    }
+//    
+//    @Test
+//    public void kaannyVastapaivaanToimiiJosTormataanSeiniin() {
+//        Pala pala4 = new Pala(10, 4);
+//        LisaPala pala5 = new LisaPala(10, 5, ALA, pala4);
+//        LisaPala pala6 = new LisaPala(9, 5, VASEN, pala5);
 //        List<Pala> palat2 = new ArrayList<Pala>();
 //        palat2.add(pala4);
 //        palat2.add(pala5);
@@ -99,40 +142,29 @@ public class PalikkaTest {
 //        Palikka palikka2 = new Palikka(palat2, pala4);
 //        palikka2.kaannaVastapaivaan();
 //        assertEquals(OIKEA, pala5.getKiinnityssuunta());
-//        assertEquals(4, pala5.getX());
+//        assertEquals(10, pala5.getX());
 //        assertEquals(4, pala5.getY());
 //        assertEquals(ALA, pala6.getKiinnityssuunta());
-//        assertEquals(4, pala6.getX());
-//        assertEquals(5, pala6.getY());        
+//        assertEquals(10, pala6.getX());
+//        assertEquals(5, pala6.getY()); 
 //    }
-//    
-
-        
     
     @Test
-    public void luoLisapalaToimiiOikein() {
-        
-    }
-    
-    @Test
-    public void palaSiirtyyOikeinKunParametrinaSuunta() {
-        
-    }
-    
-    @Test
-    public void kaannyVastapaivaanEiTeeMitaanJosOsutaanAlareunaan() {
-        
-    }
-    
-    @Test
-    public void kaannyVastapaivaanToimiiJosTormataanSeiniin() {
-        
+    public void osuukoToimiiOikein() {
+        assertEquals(palikka.osuuko(palat, pala2), true);
+        assertEquals(palikka.osuuko(palat, pala3), false);
     }
     
     
     @Test
     public void osuukoSeinaanToimiiOikein() {
-        
+        Pala pala31 = new Pala(0, 4);
+        LisaPala pala32 = new LisaPala(0, 5, ALA, pala31);
+        LisaPala pala33 = new LisaPala(-1, 5, VASEN, pala32);
+        List<Pala> palat3 = new ArrayList<Pala>();
+        Palikka palikka3 = new Palikka(palat3, pala31);
+        assertEquals(false, palikka3.osuukoSeinaan(OIKEA));
+        assertEquals(true, palikka3.osuukoSeinaan(VASEN));
     }
     
 }

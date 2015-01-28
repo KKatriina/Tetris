@@ -86,7 +86,7 @@ public class Palikka {
         return ALA;
     }
 
-    public Pala luoLisaPala(Kiinnityssuunta ksuunta, Pala pala) {
+    public LisaPala luoLisaPala(Kiinnityssuunta ksuunta, Pala pala) {
         int x = pala.getX();
         int y = pala.getY();
         if (ksuunta == OIKEA) {
@@ -96,10 +96,10 @@ public class Palikka {
             x -= 1;
         }
         if (ksuunta == YLA) {
-            y++;
+            y -= 1;
         }
         if (ksuunta == ALA) {
-            y -= 1;
+            y++;
         }
         
         return new LisaPala(x, y, ksuunta, pala);
@@ -114,41 +114,39 @@ public class Palikka {
         }
     }
     
-    private boolean osuukoSeinaan(Kiinnityssuunta suunta) {
+    public boolean osuukoSeinaan(Kiinnityssuunta suunta) {
         return osuukoSeinaan(suunta, this.palat);
     }
 
-    private boolean osuukoSeinaan(Kiinnityssuunta suunta, List<Pala> palat) {
+    public boolean osuukoSeinaan(Kiinnityssuunta suunta, List<Pala> palat) {
+        boolean palautettava = false;
         if (suunta == OIKEA) {
             for (Pala p : palat) {
-                if (p.getX() >= 10) {
-                    return true;
+                if (p.getX() > 10) {
+                    palautettava = true;
                 }
             }
-        }
-        if (suunta == VASEN) {
+        } else if (suunta == VASEN) {
             for (Pala p : palat) {
-                if (p.getX() <= 0) {
-                    return true;
+                if (p.getX() < 0) {
+                    palautettava = true;
                 }
             }
-        }
-        if (suunta == ALA) {
+        } else if (suunta == ALA) {
             for (Pala p : palat) {
-                if (p.getY() >= 20) {
-                    return true;
+                if (p.getY() > 20) {
+                    palautettava = true;
                 }
             }
-        }
-        if (suunta == YLA) {
+        } else if (suunta == YLA) {
             for (Pala p : palat) {
-                if (p.getY() <= 0) {
-                    return true;
+                if (p.getY() < 0) {
+                    palautettava = true;
                 }
                        
             }
         }
-        return false;
+        return palautettava;
     }
     
     public void kaannaVastapaivaan() {
@@ -165,32 +163,33 @@ public class Palikka {
         //jos osuu alareunaan, ei saa kaantya
         if (osuukoSeinaan(ALA, uudetPalat)) {
             return;
-        }
+        } else {
         
        
-        while (true) {
-            if (!osuukoSeinaan(YLA, uudetPalat) && !(osuukoSeinaan(OIKEA, uudetPalat)) && !(osuukoSeinaan(VASEN, uudetPalat))) {
-                break;
-            }
-            if (osuukoSeinaan(YLA, uudetPalat)) {
-                for (Pala p : uudetPalat) {
-                    siirra(ALA);
+            while (true) {
+                if (!osuukoSeinaan(YLA, uudetPalat) && !(osuukoSeinaan(OIKEA, uudetPalat)) && !(osuukoSeinaan(VASEN, uudetPalat))) {
+                    break;
                 }
-            }
-            if (osuukoSeinaan(OIKEA, uudetPalat)) {
-                for (Pala p : uudetPalat) {
-                    siirra(VASEN);
+                if (osuukoSeinaan(YLA, uudetPalat)) {
+                    for (Pala p : uudetPalat) {
+                        siirra(ALA);
+                    }
                 }
-            }
-            if (osuukoSeinaan(VASEN, uudetPalat)) {
-                for (Pala p  : uudetPalat) {
-                    siirra(OIKEA);
+                if (osuukoSeinaan(OIKEA, uudetPalat)) {
+                    for (Pala p : uudetPalat) {
+                        siirra(VASEN);
+                    }
                 }
+                if (osuukoSeinaan(VASEN, uudetPalat)) {
+                    for (Pala p  : uudetPalat) {
+                        siirra(OIKEA);
+                    }
                     
+                }
             }
-        }
         
-        palat = uudetPalat;
+            palat = uudetPalat;
+        }
     }
     
     public Pala getPaaPala() {

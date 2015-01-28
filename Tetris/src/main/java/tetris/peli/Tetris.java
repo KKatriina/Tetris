@@ -24,16 +24,15 @@ public class Tetris extends Timer implements ActionListener {
     private int leveys;
     private int korkeus;
     private Pelikentta kentta;
-    private int sivunPituus;
+
     
-    public Tetris(int leveys, int korkeus, int sivunPituus) {
+    public Tetris(int leveys, int korkeus) {
         super(1000, null);
         
         this.palikka = new Palikka();
         this.pohjanPalat = new ArrayList<Pala>();
         this.leveys = leveys;
         this.korkeus = korkeus;
-        this.sivunPituus = sivunPituus;
         
         addActionListener(this);
         setInitialDelay(2000);
@@ -78,7 +77,7 @@ public class Tetris extends Timer implements ActionListener {
         
         if (pohjaTaynna()) {
             for (Pala p : pohjanPalat) {
-                if (p.getX() == this.korkeus - this.sivunPituus) {
+                if (p.getX() == this.korkeus - 1) {
                     pohjanPalat.remove(p);
                 } else {
                     p.siirra(Kiinnityssuunta.ALA);
@@ -93,7 +92,7 @@ public class Tetris extends Timer implements ActionListener {
        
         
         for (Pala p : this.palikka.getPalat()) {
-            if (p.getX() == (this.korkeus - this.sivunPituus)) {
+            if (p.getX() == (this.korkeus - 1)) {
                 return true;
             }
             
@@ -105,10 +104,20 @@ public class Tetris extends Timer implements ActionListener {
         return false;
     }
     
+    public boolean osuuko(List<Pala> palat, Pala pala) {
+        //tää ei taida olla oikeassa luokassa
+        for (Pala p : palat) {
+            if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean pohjaTaynna() {
         int pohjassaKiinni = 0;
         for (Pala p : pohjanPalat) {
-            if (p.getX() == (this.korkeus - this.sivunPituus)) {
+            if (p.getX() == (this.korkeus - 1)) {
                 pohjassaKiinni++;
             }
                     

@@ -56,7 +56,7 @@ public class LisaPala extends Pala {
         return this.pala;
     }
 
-    void asetaUusiPaaPala(Pala get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void asetaUusiPaaPala(Pala pala) {
+        this.pala = pala;
     }
 }
