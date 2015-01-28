@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package tetris.gui;
 
-import domain.Pala;
+import tetris.domain.Pala;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import peli.Tetris;
+import tetris.peli.Tetris;
 
 /**
  *

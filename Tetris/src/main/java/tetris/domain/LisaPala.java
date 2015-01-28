@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package tetris.domain;
 
 import tetris.tetris.Kiinnityssuunta;
 import static tetris.tetris.Kiinnityssuunta.ALA;
@@ -27,12 +27,7 @@ public class LisaPala extends Pala {
     
     public Kiinnityssuunta getKiinnityssuunta() {
         return this.ksuunta;
-    }
-    
-    public void asetaUusiPaaPala(Pala pala) {
-        this.pala = pala;
-    }
-    
+    }      
     
     public void kaannaVastapaivaan() {
         int uusiX = this.pala.getX();
@@ -59,5 +54,9 @@ public class LisaPala extends Pala {
     
     public Pala getPaaPala() {
         return this.pala;
+    }
+
+    void asetaUusiPaaPala(Pala get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

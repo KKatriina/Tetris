@@ -5,10 +5,10 @@
  */
 package tetris.tetris;
 
-import domain.Palikka;
-import gui.Kayttoliittyma;
+import tetris.domain.Palikka;
+import tetris.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
-import peli.Tetris;
+import tetris.peli.Tetris;
 
 /**
  *

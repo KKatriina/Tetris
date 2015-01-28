@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package tetris.gui;
 
-import domain.Palikka;
+import tetris.domain.Palikka;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import peli.Tetris;
+import tetris.peli.Tetris;
 
 /**
  *

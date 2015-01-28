@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
-import domain.LisaPala;
-import domain.Pala;
+package tetris.domain;
+import tetris.domain.LisaPala;
+import tetris.domain.Pala;
 import java.util.*;
 import tetris.tetris.Kiinnityssuunta;
 import static tetris.tetris.Kiinnityssuunta.ALA;

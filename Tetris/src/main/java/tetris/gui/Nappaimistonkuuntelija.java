@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package tetris.gui;
 
-import domain.Palikka;
+import tetris.domain.Palikka;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import peli.Tetris;
+import tetris.peli.Tetris;
 import tetris.tetris.Kiinnityssuunta;
 import static tetris.tetris.Kiinnityssuunta.ALA;
 import static tetris.tetris.Kiinnityssuunta.OIKEA;

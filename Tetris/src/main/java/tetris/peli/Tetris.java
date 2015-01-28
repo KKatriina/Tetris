@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package peli;
+package tetris.peli;
 
-import domain.Pala;
-import domain.Palikka;
-import gui.Pelikentta;
+import tetris.domain.Pala;
+import tetris.domain.Palikka;
+import tetris.gui.Pelikentta;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

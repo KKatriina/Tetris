@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package tetris.domain;
 
 import tetris.tetris.Kiinnityssuunta;
 import static tetris.tetris.Kiinnityssuunta.ALA;
