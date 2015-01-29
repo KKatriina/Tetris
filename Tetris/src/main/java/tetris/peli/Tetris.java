@@ -12,7 +12,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
-import tetris.tetris.Kiinnityssuunta;
+import tetris.tetris.Suunta;
 
 /**
  *
@@ -63,7 +63,7 @@ public class Tetris extends Timer implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.palikka.siirra(Kiinnityssuunta.ALA);
+        this.palikka.siirra(Suunta.ALA);
         
         //jos pala osuu alareunaan TAI toiseen palaan, luodaan uusi pala
         if (osuuPohjaan(this.palikka, this.pohjanPalat)) {
@@ -80,7 +80,7 @@ public class Tetris extends Timer implements ActionListener {
                 if (p.getX() == this.korkeus - 1) {
                     pohjanPalat.remove(p);
                 } else {
-                    p.siirra(Kiinnityssuunta.ALA);
+                    p.siirra(Suunta.ALA);
                 }       
             }
         }

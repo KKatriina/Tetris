@@ -11,7 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
+import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.OIKEA;
 
 /**
  *
@@ -52,6 +53,13 @@ public class PalaTest {
         pala1.siirra(OIKEA);
         assertEquals(pala1.getX(), 3);
         assertEquals(pala1.getY(), 5);
+    }
+    
+    @Test
+    public void osuuSeinaanToimii() {
+        Pala pala2 = new Pala(11, 3);
+        assertEquals(true, pala2.osuuSeinaan(Suunta.OIKEA));
+        assertEquals(false, pala2.osuuSeinaan(Suunta.VASEN));
     }
 
     // TODO add test methods here.

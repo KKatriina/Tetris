@@ -7,11 +7,11 @@ package tetris.domain;
 import tetris.domain.LisaPala;
 import tetris.domain.Pala;
 import java.util.*;
-import tetris.tetris.Kiinnityssuunta;
-import static tetris.tetris.Kiinnityssuunta.ALA;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
-import static tetris.tetris.Kiinnityssuunta.VASEN;
-import static tetris.tetris.Kiinnityssuunta.YLA;
+import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
+import static tetris.tetris.Suunta.VASEN;
+import static tetris.tetris.Suunta.YLA;
 
 
 /**
@@ -57,7 +57,7 @@ public class Palikka {
         int i = 1;
         while (i <= lisaPaloja) {
             int suunta = random.nextInt(4);
-            Kiinnityssuunta ksuunta = selvitaKiinnityssuunta(suunta);
+            Suunta ksuunta = selvitaKiinnityssuunta(suunta);
 
             int indeksi = random.nextInt(palat.size());
             Pala kiinnitysPala = palat.get(indeksi);
@@ -73,7 +73,7 @@ public class Palikka {
 
     }       
     
-    public Kiinnityssuunta selvitaKiinnityssuunta(int suunta) {
+    public Suunta selvitaKiinnityssuunta(int suunta) {
         if (suunta == 1) {
             return OIKEA;
         }
@@ -86,7 +86,7 @@ public class Palikka {
         return ALA;
     }
 
-    public LisaPala luoLisaPala(Kiinnityssuunta ksuunta, Pala pala) {
+    public LisaPala luoLisaPala(Suunta ksuunta, Pala pala) {
         int x = pala.getX();
         int y = pala.getY();
         if (ksuunta == OIKEA) {
@@ -105,89 +105,69 @@ public class Palikka {
         return new LisaPala(x, y, ksuunta, pala);
     }
     
-    public void siirra(Kiinnityssuunta suunta) {
+    public void siirra(Suunta suunta) {
         if (osuukoSeinaan(suunta)) {
-                return;
+            return;
         }
         for (Pala p : palat) {
             p.siirra(suunta);
         }
     }
     
-    public boolean osuukoSeinaan(Kiinnityssuunta suunta) {
+    public boolean osuukoSeinaan(Suunta suunta) {
         return osuukoSeinaan(suunta, this.palat);
     }
 
-    public boolean osuukoSeinaan(Kiinnityssuunta suunta, List<Pala> palat) {
-        boolean palautettava = false;
-        
-        if (suunta == OIKEA) {
-            for (Pala p : palat) {
-                if (p.getX() > 10) {
-                    palautettava = true;
-                }
-            }
-        } else if (suunta == VASEN) {
-            for (Pala p : palat) {
-                if (p.getX() < 0) {
-                    palautettava = true;
-                }
-            }
-        } else if (suunta == ALA) {
-            for (Pala p : palat) {
-                if (p.getY() > 20) {
-                    palautettava = true;
-                }
-            }
-        } else if (suunta == YLA) {
-            for (Pala p : palat) {
-                if (p.getY() < 0) {
-                    palautettava = true;
-                }
-                       
+    public boolean osuukoSeinaan(Suunta suunta, List<Pala> palat) {
+        for (Pala p : palat) {
+            if (p.osuuSeinaan(suunta)) {
+                return true;
             }
         }
-        return palautettava;
+        return false;
     }
     
     public void kaannaVastapaivaan() {
-        List<Pala> uudetPalat = new ArrayList<Pala>();
-        uudetPalat.add(paaPala);
-        
+//        List<Pala> uudetPalat = new ArrayList<Pala>();
+//        uudetPalat.add(paaPala);
+//        
         for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
-            pala.asetaUusiPaaPala(uudetPalat.get(i - 1));
+            pala.asetaUusiPaaPala(palat.get(i - 1));
             pala.kaannaVastapaivaan();
-            uudetPalat.add(pala);
         }
         
         //jos osuu alareunaan, ei saa kaantya
-        if (osuukoSeinaan(ALA, uudetPalat)) {
-            return;
+        if (osuukoSeinaan(Suunta.ALA)) {
+            for (int i = 1; i < palat.size(); i++) {
+                LisaPala pala = (LisaPala) palat.get(i);
+                pala.asetaUusiPaaPala(palat.get(i - 1));
+                for (int j = 1; j <= 3; j++) {
+                    pala.kaannaVastapaivaan();
+                }
+            }
         } else {
             while (true) {
-                if (!osuukoSeinaan(YLA, uudetPalat) && !(osuukoSeinaan(OIKEA, uudetPalat)) && !(osuukoSeinaan(VASEN, uudetPalat))) {
+                if (!osuukoSeinaan(YLA) && !(osuukoSeinaan(OIKEA)) && !(osuukoSeinaan(VASEN))) {
                     break;
                 }
-                if (osuukoSeinaan(YLA, uudetPalat)) {
-                    for (Pala p : uudetPalat) {
+                if (osuukoSeinaan(YLA)) {
+                    for (Pala p : palat) {
                         siirra(ALA);
                     }
                 }
-                if (osuukoSeinaan(OIKEA, uudetPalat)) {
-                    for (Pala p : uudetPalat) {
+                if (osuukoSeinaan(OIKEA)) {
+                    for (Pala p : palat) {
                         siirra(VASEN);
                     }
                 }
-                if (osuukoSeinaan(VASEN, uudetPalat)) {
-                    for (Pala p  : uudetPalat) {
+                if (osuukoSeinaan(VASEN)) {
+                    for (Pala p  : palat) {
                         siirra(OIKEA);
                     }
                     
                 }
             }
-        
-            palat = uudetPalat;
         }
     }
     

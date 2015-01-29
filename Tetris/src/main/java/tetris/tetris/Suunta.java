@@ -9,6 +9,6 @@ package tetris.tetris;
  *
  * @author kkerokos
  */
-public enum Kiinnityssuunta {
+public enum Suunta {
     OIKEA, VASEN, YLA, ALA
 }

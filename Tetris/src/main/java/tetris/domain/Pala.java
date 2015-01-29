@@ -5,11 +5,11 @@
  */
 package tetris.domain;
 
-import tetris.tetris.Kiinnityssuunta;
-import static tetris.tetris.Kiinnityssuunta.ALA;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
-import static tetris.tetris.Kiinnityssuunta.VASEN;
-import static tetris.tetris.Kiinnityssuunta.YLA;
+import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
+import static tetris.tetris.Suunta.VASEN;
+import static tetris.tetris.Suunta.YLA;
 
 /**
  *
@@ -24,15 +24,15 @@ public class Pala {
         this.y = y;
     }
     
-    public void siirra(Kiinnityssuunta suunta) {
+    public void siirra(Suunta suunta) {
         //tama ei osaa varoa seinia
-        if (suunta == OIKEA) {
+        if (suunta == Suunta.OIKEA) {
             siirra(this.x + 1, this.y);
         } 
-        if (suunta == VASEN) {
+        if (suunta == Suunta.VASEN) {
             siirra(this.x - 1, this.y);
         }
-        if (suunta == ALA) {
+        if (suunta == Suunta.ALA) {
             siirra(this.x, this.y + 1);
         }
     }
@@ -49,5 +49,19 @@ public class Pala {
     public int getY() {
         return this.y;
     }
+
+    public boolean osuuSeinaan(Suunta suunta) {
+        if (suunta == Suunta.ALA) {
+            return (this.y > 20);
+        } else if (suunta == Suunta.OIKEA) {
+            return (this.x > 10);
+        } else if (suunta == Suunta.VASEN) {
+            return (this.x < 0);
+        } else {
+            return (this.y < 0);
+        }
+    }
+
+
     
 }

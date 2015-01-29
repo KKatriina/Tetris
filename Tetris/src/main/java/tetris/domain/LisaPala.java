@@ -5,27 +5,27 @@
  */
 package tetris.domain;
 
-import tetris.tetris.Kiinnityssuunta;
-import static tetris.tetris.Kiinnityssuunta.ALA;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
-import static tetris.tetris.Kiinnityssuunta.VASEN;
-import static tetris.tetris.Kiinnityssuunta.YLA;
+import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
+import static tetris.tetris.Suunta.VASEN;
+import static tetris.tetris.Suunta.YLA;
 
 /**
  *
  * @author kkerokos
  */
 public class LisaPala extends Pala {
-    private Kiinnityssuunta ksuunta;
+    private Suunta ksuunta;
     private Pala pala;
     
-    public LisaPala(int x, int y, Kiinnityssuunta ksuunta, Pala pala) {
+    public LisaPala(int x, int y, Suunta ksuunta, Pala pala) {
         super(x, y);
         this.ksuunta = ksuunta;
         this.pala = pala;
     }
     
-    public Kiinnityssuunta getKiinnityssuunta() {
+    public Suunta getKiinnityssuunta() {
         return this.ksuunta;
     }      
     

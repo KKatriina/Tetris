@@ -9,11 +9,11 @@ import tetris.domain.Palikka;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import tetris.peli.Tetris;
-import tetris.tetris.Kiinnityssuunta;
-import static tetris.tetris.Kiinnityssuunta.ALA;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
-import static tetris.tetris.Kiinnityssuunta.VASEN;
-import static tetris.tetris.Kiinnityssuunta.YLA;
+import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
+import static tetris.tetris.Suunta.VASEN;
+import static tetris.tetris.Suunta.YLA;
 
 /**
  *

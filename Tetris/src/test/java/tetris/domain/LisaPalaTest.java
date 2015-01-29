@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static tetris.tetris.Kiinnityssuunta.ALA;
-import static tetris.tetris.Kiinnityssuunta.OIKEA;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
 
 /**
  *
