@@ -46,12 +46,12 @@ public class Kayttoliittyma implements Runnable {
     }
     
     public void luoKomponentit(Container container) {
-        kentta = new Pelikentta(peli, sivunPituus);
+        kentta = new Pelikentta(this.peli, this.sivunPituus);
         
         container.add(kentta);
         
-        nk = new Nappaimistonkuuntelija(peli);
-        getFrame().addKeyListener(nk);
+        nk = new Nappaimistonkuuntelija(this.peli, kentta);
+        frame.addKeyListener(nk);
     }
 
     public JFrame getFrame() {

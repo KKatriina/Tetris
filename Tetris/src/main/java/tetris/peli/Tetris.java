@@ -77,7 +77,7 @@ public class Tetris extends Timer implements ActionListener {
         
         if (pohjaTaynna()) {
             for (Pala p : pohjanPalat) {
-                if (p.getX() == this.korkeus - 1) {
+                if (p.getX() >= this.korkeus - 1) {
                     pohjanPalat.remove(p);
                 } else {
                     p.siirra(Suunta.ALA);
@@ -89,10 +89,8 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     public boolean osuuPohjaan(Palikka palikka, List<Pala> pohjanPalat) {
-       
-        
         for (Pala p : this.palikka.getPalat()) {
-            if (p.getX() == (this.korkeus - 1)) {
+            if (p.getX() >= (this.korkeus - 1)) {
                 return true;
             }
             
@@ -117,17 +115,13 @@ public class Tetris extends Timer implements ActionListener {
     public boolean pohjaTaynna() {
         int pohjassaKiinni = 0;
         for (Pala p : pohjanPalat) {
-            if (p.getX() == (this.korkeus - 1)) {
+            if (p.getX() >= (this.korkeus - 1)) {
                 pohjassaKiinni++;
             }
                     
         }
         
-        if (pohjassaKiinni == this.leveys) {
-            return true;
-        } else {
-            return false;
-        }
+        return (pohjassaKiinni == this.leveys);
     }
 
 

@@ -127,10 +127,7 @@ public class Palikka {
         return false;
     }
     
-    public void kaannaVastapaivaan() {
-//        List<Pala> uudetPalat = new ArrayList<Pala>();
-//        uudetPalat.add(paaPala);
-//        
+    public void kaannaVastapaivaan() {   
         for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
             pala.asetaUusiPaaPala(palat.get(i - 1));

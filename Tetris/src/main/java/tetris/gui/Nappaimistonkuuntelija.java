@@ -22,9 +22,11 @@ import static tetris.tetris.Suunta.YLA;
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Tetris peli;
+    private Pelikentta kentta;
     
-    public Nappaimistonkuuntelija(Tetris peli) {
+    public Nappaimistonkuuntelija(Tetris peli, Pelikentta kentta) {
         this.peli = peli;
+        this.kentta = kentta;
     }
     
 
@@ -38,14 +40,16 @@ public class Nappaimistonkuuntelija implements KeyListener {
             peli.getPalikka().kaannaVastapaivaan();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            peli.getPalikka().siirra(ALA);
+            peli.getPalikka().siirra(Suunta.ALA);
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            peli.getPalikka().siirra(OIKEA);
+            peli.getPalikka().siirra(Suunta.OIKEA);
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            peli.getPalikka().siirra(VASEN);
+            peli.getPalikka().siirra(Suunta.VASEN);
         }
+        
+        this.kentta.paivita();
     }
 
     @Override
