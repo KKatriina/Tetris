@@ -54,7 +54,7 @@ public class Pala {
         if (suunta == Suunta.ALA) {
             return (this.y >= 18);
         } else if (suunta == Suunta.OIKEA) {
-            return (this.x >= 8);
+            return (this.x >= 9);
         } else if (suunta == Suunta.VASEN) {
             return (this.x <= 0);
         } else {
