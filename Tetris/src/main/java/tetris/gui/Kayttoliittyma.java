@@ -32,8 +32,8 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Tetris!");
-        int leveys = (peli.getLeveys()) * sivunPituus;
-        int korkeus = (peli.getKorkeus()) * sivunPituus;
+        int leveys = peli.getLeveys() * sivunPituus;
+        int korkeus = peli.getKorkeus() * sivunPituus;
  
         frame.setPreferredSize(new Dimension(leveys, korkeus));
  

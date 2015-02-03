@@ -108,9 +108,10 @@ public class Palikka {
     public void siirra(Suunta suunta) {
         if (osuukoSeinaan(suunta)) {
             return;
-        }
-        for (Pala p : palat) {
-            p.siirra(suunta);
+        } else {
+            for (Pala p : palat) {
+                p.siirra(suunta);
+            }
         }
     }
     
@@ -122,6 +123,7 @@ public class Palikka {
         for (Pala p : palat) {
             if (p.osuuSeinaan(suunta)) {
                 return true;
+                
             }
         }
         return false;

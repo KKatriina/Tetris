@@ -52,13 +52,13 @@ public class Pala {
 
     public boolean osuuSeinaan(Suunta suunta) {
         if (suunta == Suunta.ALA) {
-            return (this.y > 20);
+            return (this.y >= 18);
         } else if (suunta == Suunta.OIKEA) {
-            return (this.x > 10);
+            return (this.x >= 8);
         } else if (suunta == Suunta.VASEN) {
-            return (this.x < 0);
+            return (this.x <= 0);
         } else {
-            return (this.y < 0);
+            return (this.y <= 0);
         }
     }
 
