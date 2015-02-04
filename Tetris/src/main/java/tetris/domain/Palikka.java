@@ -33,6 +33,7 @@ public class Palikka {
         this.paaPala = new Pala(5, 0);
 
         luoPalat(paaPala, lisaPaloja);
+        kaannaVastapaivaan();
     }
     
     public Palikka(List<Pala> palat, Pala paaPala) {
@@ -54,7 +55,7 @@ public class Palikka {
     public void luoPalat(Pala pala, int lisaPaloja) {
         this.palat.add(paaPala);
         
-        int i = 1;
+        int i = 0;
         while (i <= lisaPaloja) {
             int suunta = random.nextInt(4);
             Suunta ksuunta = selvitaKiinnityssuunta(suunta);
@@ -137,7 +138,7 @@ public class Palikka {
         }
         
         //jos osuu alareunaan, ei saa kaantya
-        if (osuukoSeinaan(Suunta.ALA)) {
+        if (osuukoSeinaan(Suunta.ALA) || osuukoSeinaan(Suunta.OIKEA) || osuukoSeinaan(Suunta.ALA)) {
             for (int i = 1; i < palat.size(); i++) {
                 LisaPala pala = (LisaPala) palat.get(i);
                 pala.asetaUusiPaaPala(palat.get(i - 1));
@@ -145,29 +146,30 @@ public class Palikka {
                     pala.kaannaVastapaivaan();
                 }
             }
-        } else {
-            while (true) {
-                if (!osuukoSeinaan(YLA) && !(osuukoSeinaan(OIKEA)) && !(osuukoSeinaan(VASEN))) {
-                    break;
-                }
-                if (osuukoSeinaan(YLA)) {
-                    for (Pala p : palat) {
-                        siirra(ALA);
-                    }
-                }
-                if (osuukoSeinaan(OIKEA)) {
-                    for (Pala p : palat) {
-                        siirra(VASEN);
-                    }
-                }
-                if (osuukoSeinaan(VASEN)) {
-                    for (Pala p  : palat) {
-                        siirra(OIKEA);
-                    }
-                    
-                }
-            }
-        }
+        } 
+//            else {
+//            while (true) {
+//                if (!osuukoSeinaan(YLA) && !(osuukoSeinaan(OIKEA)) && !(osuukoSeinaan(VASEN))) {
+//                    break;
+//                }
+//                if (osuukoSeinaan(YLA)) {
+//                    for (Pala p : palat) {
+//                        siirra(ALA);
+//                    }
+//                }
+//                if (osuukoSeinaan(OIKEA)) {
+//                    for (Pala p : palat) {
+//                        siirra(VASEN);
+//                    }
+//                }
+//                if (osuukoSeinaan(VASEN)) {
+//                    for (Pala p  : palat) {
+//                        siirra(OIKEA);
+//                    }
+//                    
+//                }
+//            }
+//        }
     }
     
     public Pala getPaaPala() {

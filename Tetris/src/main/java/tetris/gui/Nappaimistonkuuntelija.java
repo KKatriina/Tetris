@@ -36,15 +36,16 @@ public class Nappaimistonkuuntelija implements KeyListener {
             peli.getPalikka().kaannaVastapaivaan();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            peli.getPalikka().siirra(Suunta.ALA);
+            peli.siirraPalikkaa(Suunta.ALA);
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            peli.getPalikka().siirra(Suunta.OIKEA);
+            peli.siirraPalikkaa(Suunta.OIKEA);
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            peli.getPalikka().siirra(Suunta.VASEN);
+            peli.siirraPalikkaa(Suunta.VASEN);
         }
         
+        peli.pelikierroksenLoppu();
         this.kentta.paivita();
     }
     

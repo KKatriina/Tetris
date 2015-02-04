@@ -5,14 +5,18 @@
  */
 package tetris.peli;
 
-import tetris.domain.Pala;
-import tetris.domain.Palikka;
-import tetris.gui.Pelikentta;
-import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import javax.swing.Timer;
+import tetris.domain.Pala;
+import tetris.domain.Palikka;
+import tetris.gui.Pelikentta;
 import tetris.tetris.Suunta;
+import static tetris.tetris.Suunta.ALA;
+import static tetris.tetris.Suunta.OIKEA;
+import static tetris.tetris.Suunta.VASEN;
+import static tetris.tetris.Suunta.YLA;
 
 /**
  *
@@ -65,48 +69,109 @@ public class Tetris extends Timer implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.palikka.siirra(Suunta.ALA);
         
-        //jos pala osuu alareunaan TAI toiseen palaan, luodaan uusi pala
+        pelikierroksenLoppu();
+
+
+        kentta.paivita();
+    }
+    
+    public void pelikierroksenLoppu() {
         if (osuuPohjaan(this.palikka, this.pohjanPalat)) {
             for (Pala p : palikka.getPalat()) {
                 this.pohjanPalat.add(p);
             }
             this.palikka = new Palikka();
-            
         }
         
         
         if (pohjaTaynna()) {
-            for (Pala p : pohjanPalat) {
-                if (p.getX() >= this.korkeus) {
-                    pohjanPalat.remove(p);
-                } else {
-                    p.siirra(Suunta.ALA);
-                }       
+            alinRiviPois();
+        }
+    }
+    
+    public void alinRiviPois() {
+        ArrayList<Pala> poistettavat = new ArrayList<Pala>();
+        for (Pala p : pohjanPalat) {
+            if (p.getY() >= (this.korkeus - 1)) {
+                poistettavat.add(p);
             }
         }
-
-        kentta.paivita();
+        for (Pala p : poistettavat) {
+            pohjanPalat.remove(p);
+        }
+        for (Pala p : pohjanPalat) {
+            p.siirra(ALA);
+        }
     }
 
     public boolean osuuPohjaan(Palikka palikka, List<Pala> pohjanPalat) {
+        boolean palautettava = false;
         for (Pala p : this.palikka.getPalat()) {
-            if (p.getX() >= (this.korkeus)) {
-                return true;
+            if (p.getY() >= (this.korkeus - 2)) {
+                palautettava = true;
             }
             
-            if (this.palikka.osuuko(pohjanPalat, p)) {
-                return true;
+            if (pysahtyykoPohjanPaloihin(p)) {
+                palautettava = true;
             }
             
+        }
+        return palautettava;
+    }
+    
+    public boolean osuukoPohjanPaloihin(Suunta suunta) {
+        for (Pala p : this.palikka.getPalat()) {
+            if (osuukoPohjanPaloihin(p, suunta)) {
+                return true;
+            }
         }
         return false;
     }
     
-    public boolean osuuko(List<Pala> palat, Pala pala) {
-        //tää ei taida olla oikeassa luokassa
-        for (Pala p : palat) {
-            if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
-                return true;
+    public void siirraPalikkaa(Suunta suunta) {
+        if (!(osuukoPohjanPaloihin(suunta))) {
+            this.palikka.siirra(suunta);
+        }
+    }
+    
+    public boolean osuukoPohjanPaloihin(Pala pala, Suunta suunta) {
+        if (this.pohjanPalat.isEmpty()) {
+            return false;
+        }
+        if (suunta == ALA) {
+            for (Pala p : this.pohjanPalat) {
+                if ((p.getY() == pala.getY() + 2) && (pala.getX() == p.getX())) {
+                    return true;
+                }
+            }
+
+        }
+        if (suunta == YLA) {
+            for (Pala p : this.pohjanPalat) {
+                if ((p.getY() == pala.getY() - 1) && (pala.getX() == p.getX())) {
+                    return true;
+                }
+            }
+
+        } 
+        if (suunta == OIKEA) {
+            for (Pala p : this.pohjanPalat) {
+                if ((p.getY() == pala.getY()) && (pala.getX() + 1 == p.getX())) {
+                    return true;
+                }
+                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+                    return true;
+                }
+            }
+        }
+        if (suunta == VASEN) {
+            for (Pala p : this.pohjanPalat) {
+                if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
+                    return true;
+                }
+                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -115,13 +180,22 @@ public class Tetris extends Timer implements ActionListener {
     public boolean pohjaTaynna() {
         int pohjassaKiinni = 0;
         for (Pala p : pohjanPalat) {
-            if (p.getX() >= (this.korkeus)) {
+            if (p.getY() > 18) {
                 pohjassaKiinni++;
             }
                     
         }
         
-        return (pohjassaKiinni == this.leveys);
+        return (pohjassaKiinni >= 10);
+    }
+
+    public boolean pysahtyykoPohjanPaloihin(Pala pala) {
+        for (Pala p : pohjanPalat) {
+            if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
