@@ -118,7 +118,7 @@ public class PalikkaTest {
     }
     
     @Test
-    public void kaannyVastapaivaanEiTeeMitaanJosOsutaanAlareunaan() {
+    public void kaannyVastapaivaanEiTeeMitaanJosTormataanSeinaan() {
         Pala pala4 = new Pala(3, 20);
         LisaPala pala5 = new LisaPala(2, 20, VASEN, pala4);
         List<Pala> palat2 = new ArrayList<Pala>();
@@ -131,25 +131,6 @@ public class PalikkaTest {
         assertEquals(VASEN, pala5.getKiinnityssuunta());
         assertEquals(2, pala5.getX());
         assertEquals(20, pala5.getY()); 
-    }
-    
-    @Test
-    public void kaannyVastapaivaanToimiiJosTormataanSeiniin() {
-        Pala pala4 = new Pala(10, 4);
-        LisaPala pala5 = new LisaPala(10, 5, ALA, pala4);
-        LisaPala pala6 = new LisaPala(9, 5, VASEN, pala5);
-        List<Pala> palat2 = new ArrayList<Pala>();
-        palat2.add(pala4);
-        palat2.add(pala5);
-        palat2.add(pala6);
-        Palikka palikka2 = new Palikka(palat2, pala4);
-        palikka2.kaannaVastapaivaan();
-        assertEquals(OIKEA, pala5.getKiinnityssuunta());
-//        assertEquals(8, pala5.getX());
-        assertEquals(4, pala5.getY());
-        assertEquals(ALA, pala6.getKiinnityssuunta());
-//        assertEquals(8, pala6.getX());
-        assertEquals(5, pala6.getY()); 
     }
     
     @Test

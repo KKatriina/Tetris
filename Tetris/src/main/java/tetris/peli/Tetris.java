@@ -40,8 +40,6 @@ public class Tetris extends Timer implements ActionListener {
         
         addActionListener(this);
         setInitialDelay(2000);
-        
-
     }
     
     public void setPelikentta(Pelikentta kentta) {
@@ -65,16 +63,30 @@ public class Tetris extends Timer implements ActionListener {
         return this.korkeus;
     }
 
+    /**
+    * Metodi siirtää pelin palikkaa yhden askeleen alaspäin koordinaatistossa,
+    * kutsuu pelikierroksenLoppu- metodia ja piirtää pelikentän uudestaan
+    *
+    * @param   e    tapahtuma, johon metodi reagoi  
+    * 
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.palikka.siirra(Suunta.ALA);
         
         pelikierroksenLoppu();
 
-
         kentta.paivita();
     }
     
+    /**
+    * Metodi kutsuu osuuPohjaan-metodia parametreillä this.palikka ja this.pohjanPalat.
+    * Jos osuuPohjaan-metodi palauttaa true, metodi lisää palikan palat pohjan paloihin ja luo
+    * peliin uuden palikan. Metodi kutsuu pohjaTäynnä-metodia, ja jos tämä palauttaa true, 
+    * kutsuu alinRiviPois-metodia.
+    * 
+    * 
+    */
     public void pelikierroksenLoppu() {
         if (osuuPohjaan(this.palikka, this.pohjanPalat)) {
             for (Pala p : palikka.getPalat()) {
@@ -82,7 +94,6 @@ public class Tetris extends Timer implements ActionListener {
             }
             this.palikka = new Palikka();
         }
-        
         
         if (pohjaTaynna()) {
             alinRiviPois();
@@ -104,6 +115,15 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
 
+    /**
+    * Metodi kertoo, osuuko palikka koordinaatiston alareunaan tai pelikentällä oleviin
+    * paloihin.
+    *
+    * @param   palikka  pelissä aktiivisena oleva palikka
+    * @param   pohjanPalat  pelikentällä olevat palat
+    * 
+    * @return       true jos palikka osuu koordinaatiston alareunaan tai pelikentällä oleviin paloihin, muuten false
+    */
     public boolean osuuPohjaan(Palikka palikka, List<Pala> pohjanPalat) {
         boolean palautettava = false;
         for (Pala p : this.palikka.getPalat()) {
@@ -118,6 +138,7 @@ public class Tetris extends Timer implements ActionListener {
         }
         return palautettava;
     }
+    
     
     public boolean osuukoPohjanPaloihin(Suunta suunta) {
         for (Pala p : this.palikka.getPalat()) {

@@ -15,6 +15,9 @@ import static tetris.tetris.Suunta.YLA;
  *
  * @author kkerokos
  */
+/**
+ * Luokka tarjoaa metodeja yhden palan koordinaattien muuttamiseen
+ */
 public class Pala {
     private int x;
     private int y;
@@ -24,8 +27,14 @@ public class Pala {
         this.y = y;
     }
     
+    /**
+    * Metodi siirtää palaa koordinaatistossa yhden askeleen haluttuun suuntaan
+    * ottamatta huomioon seiniin tai toisiin palikoihin törmäämistä
+    *
+    * @param   suunta   suunta, johon palaa halutaan siirtää koordinaatistossa
+    * 
+    */
     public void siirra(Suunta suunta) {
-        //tama ei osaa varoa seinia
         if (suunta == Suunta.OIKEA) {
             siirra(this.x + 1, this.y);
         } 
@@ -37,6 +46,14 @@ public class Pala {
         }
     }
     
+    /**
+    * Metodi vaihtaa palan koordinaatit
+    * parametreinä annettuihin koordinaatteihin
+    *
+    * @param   uusiX    haluttu uusi x-koordinaatti
+    * @param   uusiY    haluttu uusi y-koordinaatti
+    * 
+    */
     public void siirra(int uusiX, int uusiY) {
         this.x = uusiX;
         this.y = uusiY;
@@ -50,6 +67,14 @@ public class Pala {
         return this.y;
     }
 
+    /**
+    * Metodi tarkistaa, voiko palaa siirtää haluttuun suuntaan
+    * ilman että palan koordinaatit osuvat koordinaatiston ulkopuolelle
+    *
+    * @param   suunta   suunta, johon palaa aiotaan siirtää
+    * 
+    * @return           true, jos palaa voidaan siirtää koordinaatistossa
+    */
     public boolean osuuSeinaan(Suunta suunta) {
         if (suunta == Suunta.ALA) {
             return (this.y >= 18);

@@ -24,16 +24,25 @@ public class Pelikentta extends JPanel {
         this.sivunPituus = sivunPituus;
     }
     
+    /**
+    * Metodi piirtää pelikentän uudestaan
+    * 
+    */
     public void paivita() {
         this.repaint();
     }
     
+    /**
+    * Metodi piirtää pelikentälle palikkaan ja pohjan paloihin 
+    * kuuluvat palat samankokoisina neliöinä
+    *
+    * @param   g    Graphics
+    * 
+    */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        //olisi hauskaa, jos palat eri värisiä - staattinen muuttuja "Vari"? katsotaan myöhemmin
-        
+
         g.setColor(Color.blue);
         
         for (Pala p : this.peli.getPalikka().getPalat()) {

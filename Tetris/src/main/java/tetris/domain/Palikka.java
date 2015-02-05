@@ -42,8 +42,17 @@ public class Palikka {
         this.paaPala = paaPala;
     }
     
+    /**
+    * Metodi tarkistaa, ovatko parametreina annetun palan koordinaatit samat 
+    * kuin jonkin parametreina annetun palalistan palan koordinaatit
+    *
+    * @param   palat    lista Paloista, joihin osumisesta ollaan kiinnostuneita
+    * @param   pala     Pala, jonka osumisesta ollaan kiinnostuneita
+    * 
+    * @return           true, jos jonkin palat-listan palan koordinaatit ovat samat kuin parametrina annetun palan koordinaatit, muuten false
+    * 
+    */
     public boolean osuuko(List<Pala> palat, Pala pala) {
-        //tää ei taida olla oikeassa luokassa
         for (Pala p : palat) {
             if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
                 return true;
@@ -52,6 +61,13 @@ public class Palikka {
         return false;
     }
 
+    /**
+    * Metodi luo palalistan, jossa on parametrina annetun palan lisäksi parametrina annettu määrä lisäpaloja
+    *
+    * @param   pala     Pala, joka asetetaan palalistan ensimmäiseksi palaksi
+    * @param   lisaPaloja   lisapalojen haluttu määrä
+    * 
+    */
     public void luoPalat(Pala pala, int lisaPaloja) {
         this.palat.add(paaPala);
         
@@ -74,6 +90,14 @@ public class Palikka {
 
     }       
     
+    /**
+    * Metodi antaa parametrina annettua kokonaislukua vastaavan Suunnan
+    *
+    * @param   suunta   kokonaisluku väliltä 1-4
+    * 
+    * @return           parametrina annetun kokonaisluvun mukaan määrätty Suunta
+    * 
+    */
     public Suunta selvitaKiinnityssuunta(int suunta) {
         if (suunta == 1) {
             return OIKEA;
@@ -87,25 +111,40 @@ public class Palikka {
         return ALA;
     }
 
-    public LisaPala luoLisaPala(Suunta ksuunta, Pala pala) {
+    /**
+    * Metodi luo lisapalan, joka kiinnittyy parametrina annetun palan parametrina annetun suunnan mukaiseen reunaan
+    *
+    * @param   suunta   Suunta, joka kertoo, mihin parametrina annettavan palan reunaan luotava lisaPala halutaan kiinnittää
+    * @param   pala     Pala, johon luotava lisaPala halutaan kiinnittää
+    * 
+    * @return           lisaPala, joka on kiinni halutun palan halutussa reunassa
+    * 
+    */
+    public LisaPala luoLisaPala(Suunta suunta, Pala pala) {
         int x = pala.getX();
         int y = pala.getY();
-        if (ksuunta == OIKEA) {
+        if (suunta == OIKEA) {
             x++;
         }
-        if (ksuunta == VASEN) {
+        if (suunta == VASEN) {
             x -= 1;
         }
-        if (ksuunta == YLA) {
+        if (suunta == YLA) {
             y -= 1;
         }
-        if (ksuunta == ALA) {
+        if (suunta == ALA) {
             y++;
         }
         
-        return new LisaPala(x, y, ksuunta, pala);
+        return new LisaPala(x, y, suunta, pala);
     }
     
+    /**
+    * Metodi siirtää palikkaa askeleen verran haluttuun suuntaan, mikäli palikka ei osu seinään
+    *
+    * @param   suunta   Suunta, johon palikkaa halutaan siirtää
+    * 
+    */
     public void siirra(Suunta suunta) {
         if (osuukoSeinaan(suunta)) {
             return;
@@ -116,28 +155,45 @@ public class Palikka {
         }
     }
     
+    /**
+    * Metodi tarkistaa, osuuko palikka koordinaatiston ulkopuolelle, jos se liikkuu askeleen parametrina annettuun suuntaan
+    *
+    * @param   suunta   Suunta, johon palikkaa halutaan siirtyvän
+    * 
+    */
     public boolean osuukoSeinaan(Suunta suunta) {
         return osuukoSeinaan(suunta, this.palat);
     }
 
+    /**
+    * Metodi tarkistaa, osuuko jokin listan paloista koordinaatiston ulkopuolelle, jos ne liikkuvat askeleen 
+    * parametrina annettuun suuntaan
+    *
+    * @param   suunta   Suunta, johon palojen halutaan siirtyvän
+    * @param   palat    lista paloista, joita halutaan siirtää
+    * 
+    */
     public boolean osuukoSeinaan(Suunta suunta, List<Pala> palat) {
         for (Pala p : palat) {
             if (p.osuuSeinaan(suunta)) {
-                return true;
-                
+                return true; 
             }
         }
         return false;
     }
     
+    /**
+    * Metodi kääntää palikkaa 90 astetta vastapäivään, 
+    * mikäli tämä muutos ei saa siirrä yhtään palikan palaa koordinaatiston ulkopuolelle
+    * 
+    */
     public void kaannaVastapaivaan() {   
         for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
             pala.asetaUusiPaaPala(palat.get(i - 1));
             pala.kaannaVastapaivaan();
         }
-        
-        //jos osuu alareunaan, ei saa kaantya
+
         if (osuukoSeinaan(Suunta.ALA) || osuukoSeinaan(Suunta.OIKEA) || osuukoSeinaan(Suunta.ALA)) {
             for (int i = 1; i < palat.size(); i++) {
                 LisaPala pala = (LisaPala) palat.get(i);
@@ -147,29 +203,6 @@ public class Palikka {
                 }
             }
         } 
-//            else {
-//            while (true) {
-//                if (!osuukoSeinaan(YLA) && !(osuukoSeinaan(OIKEA)) && !(osuukoSeinaan(VASEN))) {
-//                    break;
-//                }
-//                if (osuukoSeinaan(YLA)) {
-//                    for (Pala p : palat) {
-//                        siirra(ALA);
-//                    }
-//                }
-//                if (osuukoSeinaan(OIKEA)) {
-//                    for (Pala p : palat) {
-//                        siirra(VASEN);
-//                    }
-//                }
-//                if (osuukoSeinaan(VASEN)) {
-//                    for (Pala p  : palat) {
-//                        siirra(OIKEA);
-//                    }
-//                    
-//                }
-//            }
-//        }
     }
     
     public Pala getPaaPala() {
