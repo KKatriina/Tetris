@@ -209,6 +209,14 @@ public class Tetris extends Timer implements ActionListener {
         
         return (pohjassaKiinni >= 10);
     }
+    
+    public void setPalikka(Palikka palikka) {
+        this.palikka = palikka;
+    }
+    
+    public void setPohjanPalat(List<Pala> pohjanPalat) {
+        this.pohjanPalat = pohjanPalat;
+    }
 
     public boolean pysahtyykoPohjanPaloihin(Pala pala) {
         for (Pala p : pohjanPalat) {
