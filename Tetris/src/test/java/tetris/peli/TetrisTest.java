@@ -87,11 +87,6 @@ public class TetrisTest {
         assertEquals(true, tetris.osuukoPohjanPaloihin(pala1, ALA));
     }
     
-    @Test
-    public void pysahtyykoPohjanPaloihinAntaaOikeinTrue() {
-        tetris.setPohjanPalat(pohjanPalat);
-        assertEquals(true, tetris.pysahtyykoPohjanPaloihin(pala2));
-    }
     
     @Test
     public void osuukoPohjanPaloihinAntaaOikeinFalse() {

@@ -80,12 +80,12 @@ public class PalikkaTest {
     
     @Test
     public void osuukoAntaaOikeinTruen() {
-        assertEquals(palikka.osuuko(palat, pala1), true);
+        assertEquals(palikka.osuvatkoPalatPaallekkain(palat, pala1), true);
     }
     
     @Test
     public void osuukoAntaaOikeinFalsen() {
-        assertEquals(palikka.osuuko(palat, pala3), false);
+        assertEquals(palikka.osuvatkoPalatPaallekkain(palat, pala3), false);
     }
     
     @Test
@@ -135,8 +135,8 @@ public class PalikkaTest {
     
     @Test
     public void osuukoToimiiOikein() {
-        assertEquals(palikka.osuuko(palat, pala2), true);
-        assertEquals(palikka.osuuko(palat, pala3), false);
+        assertEquals(palikka.osuvatkoPalatPaallekkain(palat, pala2), true);
+        assertEquals(palikka.osuvatkoPalatPaallekkain(palat, pala3), false);
     }
     
     

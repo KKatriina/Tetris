@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package tetris.domain;
+import java.awt.Color;
+import static java.awt.Color.blue;
 import tetris.domain.LisaPala;
 import tetris.domain.Pala;
 import java.util.*;
@@ -27,18 +29,21 @@ public class Palikka {
     private List<Pala> palat;
     private Pala paaPala;
     private Random random;
+    private Color vari;
     
    
     
     public Palikka() {
+        this.vari = blue;
         this.palat = new ArrayList<Pala>();
         this.random = new Random();
-        int lisaPaloja = random.nextInt(3);
+        int lisaPaloja = random.nextInt(2);
         
         this.paaPala = new Pala(5, 0);
 
         luoPalat(paaPala, lisaPaloja);
         kaannaVastapaivaan();
+        arvoVari();
     }
     
     public Palikka(List<Pala> palat, Pala paaPala) {
@@ -57,7 +62,7 @@ public class Palikka {
     * @return           true, jos jonkin palat-listan palan koordinaatit ovat samat kuin parametrina annetun palan koordinaatit, muuten false
     * 
     */
-    public boolean osuuko(List<Pala> palat, Pala pala) {
+    public boolean osuvatkoPalatPaallekkain(List<Pala> palat, Pala pala) {
         for (Pala p : palat) {
             if (p.getX() == pala.getX() && p.getY() == pala.getY()) {
                 return true;
@@ -77,7 +82,7 @@ public class Palikka {
         this.palat.add(paaPala);
         
         int i = 0;
-        while (i <= lisaPaloja + 1) {
+        while (i <= lisaPaloja + 2) {
             int suunta = random.nextInt(4);
             Suunta ksuunta = selvitaKiinnityssuunta(suunta);
 
@@ -86,7 +91,7 @@ public class Palikka {
             
             Pala uusiPala = luoLisaPala(ksuunta, kiinnitysPala);
 
-            if (!osuuko(palat, uusiPala) && uusiPala.getX() >= 0) {
+            if (!osuvatkoPalatPaallekkain(palat, uusiPala) && uusiPala.getX() >= 0) {
                 palat.add(uusiPala);
                 i++;
             }
@@ -216,6 +221,44 @@ public class Palikka {
     
     public List<Pala> getPalat() {
         return palat;
+    }
+    
+    public void setVari(Color vari) {
+        this.vari = vari;
+        for (Pala p : this.palat) {
+            p.setVari(vari);
+        }
+    }
+    
+    public Color getVari() {
+        return this.vari;
+    }
+
+    public void arvoVari() {
+        
+        int R = (int) (this.random.nextDouble() * 256);
+        int G = (int) (this.random.nextDouble() * 256);
+        int B= (int) (this.random.nextDouble() * 256);
+        Color randomVari = new Color(R, G, B);
+        
+        this.setVari(randomVari);
+        
+//        int arvottu = this.random.nextInt(7);
+//        if (arvottu == 5) {
+//            setVari(Color.YELLOW);
+//        }
+//        if (arvottu == 4) {
+//            setVari(Color.RED);
+//        }
+//        if (arvottu == 3) {
+//            setVari(Color.GREEN);
+//        }
+//        if (arvottu == 2) {
+//            setVari(Color.PINK);
+//        }
+//        if (arvottu == 1) {
+//            setVari(Color.orange);
+//        }
     }
     
     

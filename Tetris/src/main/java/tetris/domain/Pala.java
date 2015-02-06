@@ -5,6 +5,9 @@
  */
 package tetris.domain;
 
+
+import java.awt.Color;
+import static java.awt.Color.blue;
 import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;
 import static tetris.tetris.Suunta.OIKEA;
@@ -21,8 +24,11 @@ import static tetris.tetris.Suunta.YLA;
 public class Pala {
     private int x;
     private int y;
+    private Color vari;
+    
     
     public Pala(int x, int y) {
+        this.vari = blue;
         this.x = x;
         this.y = y;
     }
@@ -85,6 +91,14 @@ public class Pala {
         } else {
             return (this.y <= 0);
         }
+    }
+    
+    public void setVari(Color vari) {
+        this.vari = vari;
+    }
+    
+    public Color getVari() {
+        return this.vari;
     }
 
 

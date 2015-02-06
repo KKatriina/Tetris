@@ -37,8 +37,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            peli.getPalikka().kaannaVastapaivaan();
-            //tässä pitää katsoa, ettei käännytä pohjan palojen päälle! se on vissiin toistaiseksi mahdollista
+            peli.kaannaVastapaivaan();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             peli.siirraPalikkaa(Suunta.ALA);

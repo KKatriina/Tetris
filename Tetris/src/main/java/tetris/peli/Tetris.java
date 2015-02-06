@@ -32,6 +32,8 @@ public class Tetris extends Timer implements ActionListener {
     private int leveys;
     private int korkeus;
     private Pelikentta kentta;
+    private boolean jatkuu;
+    private int nopeus = 1000;
 
     
     public Tetris(int leveys, int korkeus) {
@@ -41,9 +43,10 @@ public class Tetris extends Timer implements ActionListener {
         this.pohjanPalat = new ArrayList<Pala>();
         this.leveys = leveys;
         this.korkeus = korkeus;
+        this.jatkuu = true;
         
         addActionListener(this);
-        setInitialDelay(2000);
+        setInitialDelay(1000);
     }
     
     public void setPelikentta(Pelikentta kentta) {
@@ -76,9 +79,16 @@ public class Tetris extends Timer implements ActionListener {
     */
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!jatkuu) {
+            return;
+        }
+        
         this.palikka.siirra(Suunta.ALA);
         
         pelikierroksenLoppu();
+        
+        
+        setDelay(nopeus);
 
         kentta.paivita();
     }
@@ -97,6 +107,19 @@ public class Tetris extends Timer implements ActionListener {
                 this.pohjanPalat.add(p);
             }
             this.palikka = new Palikka();
+            
+            for (Pala p : this.palikka.getPalat()) {
+                if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
+                    this.jatkuu = false;
+            }
+                
+            if (nopeus > 100) {
+                nopeus -= 5;
+            } else if (nopeus > 50) {
+                nopeus -= 2;
+            }
+        }
+            
         }
         
         if (pohjaTaynna()) {
@@ -135,7 +158,7 @@ public class Tetris extends Timer implements ActionListener {
                 palautettava = true;
             }
             
-            if (pysahtyykoPohjanPaloihin(p)) {
+            if (osuukoPohjanPaloihin(p, ALA)) {
                 palautettava = true;
             }
             
@@ -165,7 +188,7 @@ public class Tetris extends Timer implements ActionListener {
         }
         if (suunta == ALA) {
             for (Pala p : this.pohjanPalat) {
-                if ((p.getY() == pala.getY() + 2) && (pala.getX() == p.getX())) {
+                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
                     return true;
                 }
             }
@@ -203,15 +226,20 @@ public class Tetris extends Timer implements ActionListener {
     }
     
     public boolean pohjaTaynna() {
-        int pohjassaKiinni = 0;
-        for (Pala p : pohjanPalat) {
-            if (p.getY() > 18) {
-                pohjassaKiinni++;
+        
+        for (int i = 0; i < this.leveys; i++) {
+            boolean temp = false;
+            for (Pala p : this.pohjanPalat) {
+                if (p.getX() == i && p.getY() == (this.korkeus - 2)) {
+                    temp = true;
+                }
             }
-                    
+            if (!temp) {
+                return false;
+            }
         }
         
-        return (pohjassaKiinni >= 10);
+        return true; 
     }
     
     public void setPalikka(Palikka palikka) {
@@ -222,13 +250,19 @@ public class Tetris extends Timer implements ActionListener {
         this.pohjanPalat = pohjanPalat;
     }
 
-    public boolean pysahtyykoPohjanPaloihin(Pala pala) {
-        for (Pala p : pohjanPalat) {
-            if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-                return true;
+    public void kaannaVastapaivaan() {
+        this.palikka.kaannaVastapaivaan();
+        boolean osuuko = false;
+        for (Pala p : this.palikka.getPalat()) {
+            if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
+                osuuko = true;
             }
         }
-        return false;
+        if (osuuko) {
+            for (int i = 1; i <= 3; i++) {
+                this.palikka.kaannaVastapaivaan();
+            }
+        }
     }
 
 

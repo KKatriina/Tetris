@@ -6,7 +6,6 @@
 package tetris.gui;
 
 import tetris.domain.Pala;
-import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import tetris.peli.Tetris;
@@ -47,14 +46,17 @@ public class Pelikentta extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(Color.blue);
         
         for (Pala p : this.peli.getPalikka().getPalat()) {
+            g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
         }
         
         for (Pala p : this.peli.getPohjanPalat()) {
+            g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
         }
+        
+    
     }
 }
