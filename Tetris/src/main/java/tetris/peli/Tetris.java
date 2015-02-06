@@ -207,9 +207,9 @@ public class Tetris extends Timer implements ActionListener {
                 if ((p.getY() == pala.getY()) && (pala.getX() + 1 == p.getX())) {
                     return true;
                 }
-                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-                    return true;
-                }
+//                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+//                    return true;
+//                }
             }
         }
         if (suunta == VASEN) {
@@ -217,9 +217,9 @@ public class Tetris extends Timer implements ActionListener {
                 if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
                     return true;
                 }
-                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-                    return true;
-                }
+//                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+//                    return true;
+//                }
             }
         }
         return false;
