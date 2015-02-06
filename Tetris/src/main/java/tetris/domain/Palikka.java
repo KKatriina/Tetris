@@ -18,6 +18,11 @@ import static tetris.tetris.Suunta.YLA;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka tarjoaa metodeja paloista koostuvan palikan koordinaattien muuttamiseen
+ * eli siirtämiseen ja kääntymiseen
+ */
 public class Palikka {
     private List<Pala> palat;
     private Pala paaPala;
@@ -28,7 +33,7 @@ public class Palikka {
     public Palikka() {
         this.palat = new ArrayList<Pala>();
         this.random = new Random();
-        int lisaPaloja = random.nextInt(4);
+        int lisaPaloja = random.nextInt(3);
         
         this.paaPala = new Pala(5, 0);
 
@@ -72,7 +77,7 @@ public class Palikka {
         this.palat.add(paaPala);
         
         int i = 0;
-        while (i <= lisaPaloja) {
+        while (i <= lisaPaloja + 1) {
             int suunta = random.nextInt(4);
             Suunta ksuunta = selvitaKiinnityssuunta(suunta);
 

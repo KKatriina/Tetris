@@ -15,6 +15,11 @@ import static tetris.tetris.Suunta.YLA;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka tarjoaa metodeja yhden palan koordinaattien muuttamiseen siinä tapauksessa, jossa
+ * pala on kiinnittynyt johonkin toiseen palaan
+ */
 public class LisaPala extends Pala {
     private Suunta ksuunta;
     private Pala pala;

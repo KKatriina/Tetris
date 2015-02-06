@@ -9,6 +9,10 @@ package tetris.tetris;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka sisältää sisältää neljä enum-vakioita, jotka edustavat palan ja palikan liikkumissuuntaa pelikentällä
+ */
 public enum Suunta {
     OIKEA, VASEN, YLA, ALA
 }

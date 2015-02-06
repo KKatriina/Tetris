@@ -22,6 +22,10 @@ import static tetris.tetris.Suunta.YLA;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka sisältää pelin varsinaiseen pelaamiseen liittyviä metodeja
+ */
 public class Tetris extends Timer implements ActionListener {
     private Palikka palikka;
     private List<Pala> pohjanPalat;
