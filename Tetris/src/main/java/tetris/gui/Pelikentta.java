@@ -15,6 +15,10 @@ import tetris.peli.Tetris;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka luo piirtoalustan ja piirtää sille pelissä tarvittavat palat ja palikan
+ */
 public class Pelikentta extends JPanel {
     private Tetris peli;
     private int sivunPituus;

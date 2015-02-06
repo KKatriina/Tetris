@@ -19,6 +19,10 @@ import static tetris.tetris.Suunta.YLA;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka kuuntelee nuolinäppäimiä ja siirtää ja kääntää pelin palikkaa painetun nuolinäppäimen mukaisesti
+ */
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Tetris peli;

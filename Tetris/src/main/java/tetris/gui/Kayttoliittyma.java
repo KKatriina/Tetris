@@ -16,6 +16,10 @@ import tetris.peli.Tetris;
  *
  * @author kkerokos
  */
+
+/**
+ * Luokka tarjoaa pelissä tarvittavan graafisen käyttöliittymän
+ */
 public class Kayttoliittyma implements Runnable {
     private JFrame frame;
     private Tetris peli;
