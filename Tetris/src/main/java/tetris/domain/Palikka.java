@@ -204,7 +204,7 @@ public class Palikka {
             pala.kaannaVastapaivaan();
         }
 
-        if (osuukoSeinaan(Suunta.ALA) || osuukoSeinaan(Suunta.OIKEA) || osuukoSeinaan(Suunta.ALA)) {
+        if (osuukoSeinaan(Suunta.VASEN) || osuukoSeinaan(Suunta.OIKEA) || osuukoSeinaan(Suunta.ALA)) {
             for (int i = 1; i < palat.size(); i++) {
                 LisaPala pala = (LisaPala) palat.get(i);
                 pala.asetaUusiPaaPala(palat.get(i - 1));
@@ -236,9 +236,9 @@ public class Palikka {
 
     public void arvoVari() {
         
-        int R = (int) (this.random.nextDouble() * 256);
-        int G = (int) (this.random.nextDouble() * 256);
-        int B= (int) (this.random.nextDouble() * 256);
+        int R = this.random.nextInt(256);
+        int G = this.random.nextInt(256);
+        int B = this.random.nextInt(256);
         Color randomVari = new Color(R, G, B);
         
         this.setVari(randomVari);

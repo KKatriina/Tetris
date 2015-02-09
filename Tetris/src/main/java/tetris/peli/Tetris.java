@@ -83,10 +83,9 @@ public class Tetris extends Timer implements ActionListener {
             return;
         }
         
-        this.palikka.siirra(Suunta.ALA);
-        
         pelikierroksenLoppu();
         
+        this.palikka.siirra(Suunta.ALA);       
         
         setDelay(nopeus);
 
@@ -113,10 +112,12 @@ public class Tetris extends Timer implements ActionListener {
                     this.jatkuu = false;
             }
                 
-            if (nopeus > 100) {
+            if (nopeus > 200) {
                 nopeus -= 5;
-            } else if (nopeus > 50) {
+            } else if (nopeus > 100) {
                 nopeus -= 2;
+            } else if (nopeus > 50) {
+                nopeus -= 1;
             }
         }
             

@@ -49,7 +49,6 @@ public class Nappaimistonkuuntelija implements KeyListener {
             peli.siirraPalikkaa(Suunta.VASEN);
         }
         
-        peli.pelikierroksenLoppu();
         this.kentta.paivita();
     }
     
