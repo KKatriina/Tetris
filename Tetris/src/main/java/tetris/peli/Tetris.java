@@ -101,7 +101,7 @@ public class Tetris extends Timer implements ActionListener {
     * 
     */
     public void pelikierroksenLoppu() {
-        if (osuuPohjaan(this.palikka, this.pohjanPalat)) {
+        if (osuuPohjaan()) {
             for (Pala p : palikka.getPalat()) {
                 this.pohjanPalat.add(p);
             }
@@ -128,6 +128,12 @@ public class Tetris extends Timer implements ActionListener {
         }
     }
     
+    /**
+    * Metodi poistaa pelkentän alareunasta alimman rivin palikoita ja siirtää muita
+    * pohjan palikoita yhden askeleen alaspäin
+    * 
+    * 
+    */
     public void alinRiviPois() {
         ArrayList<Pala> poistettavat = new ArrayList<Pala>();
         for (Pala p : pohjanPalat) {
@@ -152,7 +158,7 @@ public class Tetris extends Timer implements ActionListener {
     * 
     * @return       true jos palikka osuu koordinaatiston alareunaan tai pelikentällä oleviin paloihin, muuten false
     */
-    public boolean osuuPohjaan(Palikka palikka, List<Pala> pohjanPalat) {
+    public boolean osuuPohjaan() {
         boolean palautettava = false;
         for (Pala p : this.palikka.getPalat()) {
             if (p.getY() >= (this.korkeus - 2)) {
@@ -167,7 +173,11 @@ public class Tetris extends Timer implements ActionListener {
         return palautettava;
     }
     
-    
+    /**
+    * Metodi kertoo, osuuko pelin palikka pohjan paloihin
+    * 
+    * 
+    */
     public boolean osuukoPohjanPaloihin(Suunta suunta) {
         for (Pala p : this.palikka.getPalat()) {
             if (osuukoPohjanPaloihin(p, suunta)) {
@@ -177,57 +187,81 @@ public class Tetris extends Timer implements ActionListener {
         return false;
     }
     
+    
+    /**
+    * Metodi siirtää pelin palikkaa haluttuun suuntaan, mikäli tämä ei siirrä
+    * palikkaa päällekkäin pohjan palojen kanssa 
+    * 
+    */
     public void siirraPalikkaa(Suunta suunta) {
         if (!(osuukoPohjanPaloihin(suunta))) {
             this.palikka.siirra(suunta);
         }
     }
     
+    /**
+    * Metodi tarkistaa, osuuko yksi pala päällekäin pohjan palojen kanssa, 
+    * mikäli palaa siirretään yksi askel haluttuun suuntaan
+    * 
+    * @param    pala    Pala, jota ollaan liikuttamassa
+    * @param    suunta  Suunta, johon palaa ollaan liikuttamassa
+    * 
+    */
     public boolean osuukoPohjanPaloihin(Pala pala, Suunta suunta) {
+        if (this.pohjanPalat == null) {
+            return false;
+        }
         if (this.pohjanPalat.isEmpty()) {
             return false;
         }
         if (suunta == ALA) {
-            for (Pala p : this.pohjanPalat) {
-                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-                    return true;
-                }
-            }
-
+            return osuukoPaloihinAlhaalla(pala);
         }
-        if (suunta == YLA) {
-            for (Pala p : this.pohjanPalat) {
-                if ((p.getY() == pala.getY() - 1) && (pala.getX() == p.getX())) {
-                    return true;
-                }
-            }
-
-        } 
         if (suunta == OIKEA) {
-            for (Pala p : this.pohjanPalat) {
-                if ((p.getY() == pala.getY()) && (pala.getX() + 1 == p.getX())) {
-                    return true;
-                }
-//                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-//                    return true;
-//                }
-            }
+            return osuukoPaloihinOikealla(pala);
         }
         if (suunta == VASEN) {
-            for (Pala p : this.pohjanPalat) {
-                if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
-                    return true;
-                }
-//                if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
-//                    return true;
-//                }
+            return osuukoPaloihinVasemmalla(pala);
+        }
+        return false;
+    }
+    
+    public boolean osuukoPaloihinAlhaalla(Pala pala) {
+        for (Pala p : this.pohjanPalat) {
+            if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
+                return true;
             }
         }
         return false;
     }
     
+    public boolean osuukoPaloihinOikealla(Pala pala) {
+        for (Pala p : this.pohjanPalat) {
+            if ((p.getY() == pala.getY()) && (pala.getX() + 1 == p.getX())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean osuukoPaloihinVasemmalla(Pala pala) {
+        for (Pala p : this.pohjanPalat) {
+            if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
+    /**
+    * Metodi kertoo, onko pelikentän alin palarivi täynnä
+    * 
+    * @return   true, jos pelikentän alin palarivi on täynnä, muuten false
+    * 
+    */
     public boolean pohjaTaynna() {
-        
         for (int i = 0; i < this.leveys; i++) {
             boolean temp = false;
             for (Pala p : this.pohjanPalat) {
@@ -251,6 +285,12 @@ public class Tetris extends Timer implements ActionListener {
         this.pohjanPalat = pohjanPalat;
     }
 
+    /**
+    * Metodi kääntää pelin palikkaa vastapäivään, mikäli tämä ei saa palikan 
+    * paloja asettumaan päällekkäin pohjan palojen kanssa
+    * 
+    * 
+    */
     public void kaannaVastapaivaan() {
         this.palikka.kaannaVastapaivaan();
         boolean osuuko = false;
