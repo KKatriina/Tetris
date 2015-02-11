@@ -118,6 +118,7 @@ public class TetrisTest {
         tetris.setPalikka(palikka);
         assertEquals(false, tetris.osuukoPohjanPaloihin(VASEN));
         assertEquals(true, tetris.osuukoPohjanPaloihin(ALA));
+        assertEquals(false, tetris.osuukoPohjanPaloihin(OIKEA));
     }
     
     @Test
@@ -231,19 +232,79 @@ public class TetrisTest {
     }
     
     @Test
-    public void osuukoPaloihinOikeallaVasemmallaJaAlhaallaToimii() {
+    public void osuukoPaloihinOikeallaVasemmallaJaAlhaallaAntaaOikeinTrue() {
         Pala pala4 = new Pala(5,3);
         Pala pala5 = new Pala(5,4);
         Pala pala6 = new Pala(4,3);
+        Pala pala7 = new Pala(6, 3);
         List<Pala> pohja4 = new ArrayList<Pala>();
         pohja4.add(pala6);
         pohja4.add(pala5);
+        pohja4.add(pala7);
         tetris.setPohjanPalat(pohja4);
         assertEquals(true, tetris.osuukoPaloihinVasemmalla(pala4));
         assertEquals(true, tetris.osuukoPaloihinAlhaalla(pala4));
+        assertEquals(true, tetris.osuukoPaloihinOikealla(pala4));
+        
+    }
+    
+    @Test
+    public void osuukoPaloihinOikeallaVasemmallaJaAlhaallaAntaaOikeinFalse() {
+        Pala pala4 = new Pala(5,3);
+        Pala pala5 = new Pala(5,5);
+        Pala pala6 = new Pala(3,3);
+        Pala pala7 = new Pala(7, 3);
+        List<Pala> pohja4 = new ArrayList<Pala>();
+        pohja4.add(pala6);
+        pohja4.add(pala5);
+        pohja4.add(pala7);
+        tetris.setPohjanPalat(pohja4);
+        assertEquals(false, tetris.osuukoPaloihinVasemmalla(pala4));
+        assertEquals(false, tetris.osuukoPaloihinAlhaalla(pala4));
         assertEquals(false, tetris.osuukoPaloihinOikealla(pala4));
         
     }
-            
+    
+    @Test
+    public void saadaNopeuttaToimiiIsollaSyotteella() {
+        tetris.setNopeus(201);
+        tetris.saadaNopeutta();
+        assertEquals(196, tetris.getNopeus());
+    }
+    
+    @Test
+    public void saadaNopeuttaToimiiKeskikokoisellaSyotteella() {
+        tetris.setNopeus(200);
+        tetris.saadaNopeutta();
+        assertEquals(198, tetris.getNopeus());
+    }
+    
+    @Test
+    public void saadaNopeuttaToimiiPienellaSyotteella() {
+        tetris.setNopeus(51);
+        tetris.saadaNopeutta();
+        assertEquals(50, tetris.getNopeus());
+        tetris.saadaNopeutta();
+        assertEquals(50, tetris.getNopeus());
+    }
+    
+    @Test
+    public void luoPeliinUusiPalikkaLuoPalikanOikein() {
+        tetris.setPalikka(palikka);
+        tetris.luoPeliinUusiPalikka();
+        assertEquals(5, tetris.getPalikka().getPaaPala().getX());
+        assertEquals(0, tetris.getPalikka().getPaaPala().getY());
+    }
+    
+    @Test
+    public void peliLoppuuJosUusiPalikkaOsuuPohjanPaloihin() {
+        Pala pala5 = new Pala(5, 0);
+        pohjanPalat.add(pala5);
+        tetris.setPohjanPalat(pohjanPalat);
+        tetris.luoPeliinUusiPalikka();
+        assertEquals(false, tetris.getJatkuu());
+    }
+    
+    
 
 }

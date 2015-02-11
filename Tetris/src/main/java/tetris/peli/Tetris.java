@@ -77,13 +77,16 @@ public class Tetris extends Timer implements ActionListener {
     public void setNopeus(int n) {
         this.nopeus = n;
     }
+    
+    public boolean getJatkuu() {
+        return this.jatkuu;
+    }
 
     /**
     * Metodi siirtää pelin palikkaa yhden askeleen alaspäin koordinaatistossa,
     * kutsuu pelikierroksenLoppu- metodia ja piirtää pelikentän uudestaan
     *
     * @param   e    tapahtuma, johon metodi reagoi  
-    * 
     */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -101,12 +104,10 @@ public class Tetris extends Timer implements ActionListener {
     }
     
     /**
-    * Metodi kutsuu osuuPohjaan-metodia parametreillä this.palikka ja this.pohjanPalat.
-    * Jos osuuPohjaan-metodi palauttaa true, metodi lisää palikan palat pohjan paloihin ja luo
-    * peliin uuden palikan. Metodi kutsuu pohjaTäynnä-metodia, ja jos tämä palauttaa true, 
-    * kutsuu alinRiviPois-metodia.
-    * 
-    * 
+    * Metodi tarkistaa, osuuko palikka pohjaan, ja jos osuu,
+    * lisaa palikan palat pohjan paloihin, luo uuden palikan ja 
+    * saataa nopeutta. Jos pelikentan alin kerros tayttyy paloista,
+    * metodi poistaa alimman palakerroksen.
     */
     public void pelikierroksenLoppu() {
         if (osuuPohjaan()) {
@@ -117,11 +118,15 @@ public class Tetris extends Timer implements ActionListener {
             saadaNopeutta();
         }
         
-        if (pohjaTaynna()) {
+        while (pohjaTaynna()) {
             alinRiviPois();
         }
     }
     
+    /**
+    * Metodi luo peliin uuden palikan, ja jos uusi palikka asettuu pohjan
+    * palojen paalle, estaa palikan liikkumisen alaspain
+    */
     public void luoPeliinUusiPalikka() {
         this.palikka = new Palikka();
             
@@ -132,6 +137,9 @@ public class Tetris extends Timer implements ActionListener {
        }
     }
     
+    /**
+    * Metodi pienentaa pelin nopeutta
+    */
     public void saadaNopeutta() {
         if (nopeus > 200) {
             nopeus -= 5;
@@ -145,8 +153,6 @@ public class Tetris extends Timer implements ActionListener {
     /**
     * Metodi poistaa pelkentän alareunasta alimman rivin palikoita ja siirtää muita
     * pohjan palikoita yhden askeleen alaspäin
-    * 
-    * 
     */
     public void alinRiviPois() {
         ArrayList<Pala> poistettavat = new ArrayList<Pala>();
@@ -189,8 +195,6 @@ public class Tetris extends Timer implements ActionListener {
     
     /**
     * Metodi kertoo, osuuko pelin palikka pohjan paloihin
-    * 
-    * 
     */
     public boolean osuukoPohjanPaloihin(Suunta suunta) {
         for (Pala p : this.palikka.getPalat()) {
@@ -205,7 +209,6 @@ public class Tetris extends Timer implements ActionListener {
     /**
     * Metodi siirtää pelin palikkaa haluttuun suuntaan, mikäli tämä ei siirrä
     * palikkaa päällekkäin pohjan palojen kanssa 
-    * 
     */
     public void siirraPalikkaa(Suunta suunta) {
         if (!(osuukoPohjanPaloihin(suunta))) {
@@ -218,8 +221,7 @@ public class Tetris extends Timer implements ActionListener {
     * mikäli palaa siirretään yksi askel haluttuun suuntaan
     * 
     * @param    pala    Pala, jota ollaan liikuttamassa
-    * @param    suunta  Suunta, johon palaa ollaan liikuttamassa
-    * 
+    * @param    suunta  Suunta, johon palaa ollaan liikuttamassa 
     */
     public boolean osuukoPohjanPaloihin(Pala pala, Suunta suunta) {
         if (this.pohjanPalat == null) {
@@ -273,7 +275,6 @@ public class Tetris extends Timer implements ActionListener {
     * Metodi kertoo, onko pelikentän alin palarivi täynnä
     * 
     * @return   true, jos pelikentän alin palarivi on täynnä, muuten false
-    * 
     */
     public boolean pohjaTaynna() {
         for (int i = 0; i < this.leveys; i++) {
@@ -302,8 +303,6 @@ public class Tetris extends Timer implements ActionListener {
     /**
     * Metodi kääntää pelin palikkaa vastapäivään, mikäli tämä ei saa palikan 
     * paloja asettumaan päällekkäin pohjan palojen kanssa
-    * 
-    * 
     */
     public void kaannaVastapaivaan() {
         this.palikka.kaannaVastapaivaan(this.leveys, this.korkeus);
