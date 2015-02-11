@@ -37,9 +37,6 @@ public class LisaPala extends Pala {
     public void kaannaVastapaivaan() {
         int uusiX = this.pala.getX();
         int uusiY = this.pala.getY();
-        
-        
-        
         if (this.ksuunta == OIKEA) {
             this.ksuunta = YLA;
             uusiY -= 1;

@@ -23,9 +23,6 @@ import static tetris.tetris.Suunta.YLA;
  * @author kkerokos
  */
 public class PalikkaTest {
-    
-    //miksi pit ei toimi?
-    
     Palikka palikka;
     Pala pala1;
     LisaPala pala2;
@@ -63,16 +60,24 @@ public class PalikkaTest {
     
     @Test
     public void palojenJarjestysSailyyKaannyttaessa() {
-        palikka.kaannaVastapaivaan();
+        palikka.kaannaVastapaivaan(10, 20);
         assertEquals(pala2, palikka.getPalat().get(1));
         assertEquals(pala1, palikka.getPalat().get(0));
         
     }
     
+    @Test
+    public void pyoraytaPalikkaaKerranToimii() {
+        palikka.pyoraytaPalikkaaKerran();
+        assertEquals(OIKEA, pala2.getKiinnityssuunta());
+        assertEquals(3, pala2.getX());
+        assertEquals(5, pala2.getY());
+    }
+    
     
     @Test
     public void kahdenPalanPalikkaKaantyyOikein() {
-        palikka.kaannaVastapaivaan();
+        palikka.kaannaVastapaivaan(10, 20);
         assertEquals(OIKEA, pala2.getKiinnityssuunta());
         assertEquals(3, pala2.getX());
         assertEquals(5, pala2.getY());
@@ -98,7 +103,7 @@ public class PalikkaTest {
         palat2.add(pala5);
         palat2.add(pala6);
         Palikka palikka2 = new Palikka(palat2, pala4);
-        palikka2.kaannaVastapaivaan();
+        palikka2.kaannaVastapaivaan(10, 20);
         assertEquals(OIKEA, pala5.getKiinnityssuunta());
         assertEquals(4, pala5.getX());
         assertEquals(4, pala5.getY());
@@ -127,7 +132,7 @@ public class PalikkaTest {
         Palikka palikka2 = new Palikka(palat2, pala4);
 
         
-        palikka2.kaannaVastapaivaan();
+        palikka2.kaannaVastapaivaan(10, 20);
         assertEquals(VASEN, pala5.getKiinnityssuunta());
         assertEquals(2, pala5.getX());
         assertEquals(20, pala5.getY()); 
@@ -150,8 +155,8 @@ public class PalikkaTest {
         palat3.add(pala5);
         palat3.add(pala6);
         Palikka palikka3 = new Palikka(palat3, pala4);
-        assertEquals(true, palikka3.osuukoSeinaan(Suunta.OIKEA));
-        assertEquals(false, palikka3.osuukoSeinaan(Suunta.VASEN));
+        assertEquals(true, palikka3.osuukoSeinaan(Suunta.OIKEA, 10, 20));
+        assertEquals(false, palikka3.osuukoSeinaan(Suunta.VASEN, 10, 20));
     }
     
     @Test

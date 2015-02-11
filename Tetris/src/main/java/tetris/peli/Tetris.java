@@ -69,6 +69,14 @@ public class Tetris extends Timer implements ActionListener {
     public int getKorkeus() {
         return this.korkeus;
     }
+    
+    public int getNopeus() {
+        return this.nopeus;
+    }
+    
+    public void setNopeus(int n) {
+        this.nopeus = n;
+    }
 
     /**
     * Metodi siirtää pelin palikkaa yhden askeleen alaspäin koordinaatistossa,
@@ -85,7 +93,7 @@ public class Tetris extends Timer implements ActionListener {
         
         pelikierroksenLoppu();
         
-        this.palikka.siirra(Suunta.ALA);       
+        this.palikka.siirra(Suunta.ALA, this.leveys, this.korkeus);       
         
         setDelay(nopeus);
 
@@ -105,26 +113,32 @@ public class Tetris extends Timer implements ActionListener {
             for (Pala p : palikka.getPalat()) {
                 this.pohjanPalat.add(p);
             }
-            this.palikka = new Palikka();
-            
-            for (Pala p : this.palikka.getPalat()) {
-                if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
-                    this.jatkuu = false;
-            }
-                
-            if (nopeus > 200) {
-                nopeus -= 5;
-            } else if (nopeus > 100) {
-                nopeus -= 2;
-            } else if (nopeus > 50) {
-                nopeus -= 1;
-            }
-        }
-            
+            luoPeliinUusiPalikka();
+            saadaNopeutta();
         }
         
         if (pohjaTaynna()) {
             alinRiviPois();
+        }
+    }
+    
+    public void luoPeliinUusiPalikka() {
+        this.palikka = new Palikka();
+            
+        for (Pala p : this.palikka.getPalat()) {
+            if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
+                this.jatkuu = false;
+            }
+       }
+    }
+    
+    public void saadaNopeutta() {
+        if (nopeus > 200) {
+            nopeus -= 5;
+        } else if (nopeus > 100) {
+            nopeus -= 2;
+        } else if (nopeus > 50) {
+            nopeus -= 1;
         }
     }
     
@@ -195,7 +209,7 @@ public class Tetris extends Timer implements ActionListener {
     */
     public void siirraPalikkaa(Suunta suunta) {
         if (!(osuukoPohjanPaloihin(suunta))) {
-            this.palikka.siirra(suunta);
+            this.palikka.siirra(suunta, this.leveys, this.korkeus);
         }
     }
     
@@ -292,7 +306,7 @@ public class Tetris extends Timer implements ActionListener {
     * 
     */
     public void kaannaVastapaivaan() {
-        this.palikka.kaannaVastapaivaan();
+        this.palikka.kaannaVastapaivaan(this.leveys, this.korkeus);
         boolean osuuko = false;
         for (Pala p : this.palikka.getPalat()) {
             if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
@@ -301,7 +315,7 @@ public class Tetris extends Timer implements ActionListener {
         }
         if (osuuko) {
             for (int i = 1; i <= 3; i++) {
-                this.palikka.kaannaVastapaivaan();
+                this.palikka.kaannaVastapaivaan(this.leveys, this.korkeus);
             }
         }
     }

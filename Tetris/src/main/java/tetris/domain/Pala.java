@@ -81,11 +81,11 @@ public class Pala {
     * 
     * @return           true, jos palaa voidaan siirtää koordinaatistossa
     */
-    public boolean osuuSeinaan(Suunta suunta) {
+    public boolean osuuSeinaan(Suunta suunta, int leveys, int korkeus) {
         if (suunta == Suunta.ALA) {
-            return (this.y >= 18);
+            return (this.y >= (korkeus - 2));
         } else if (suunta == Suunta.OIKEA) {
-            return (this.x >= 9);
+            return (this.x >= (leveys - 1));
         } else if (suunta == Suunta.VASEN) {
             return (this.x <= 0);
         } else {

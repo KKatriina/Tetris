@@ -58,13 +58,8 @@ public class PalaTest {
     @Test
     public void osuuSeinaanToimii() {
         Pala pala2 = new Pala(11, 3);
-        assertEquals(true, pala2.osuuSeinaan(Suunta.OIKEA));
-        assertEquals(false, pala2.osuuSeinaan(Suunta.VASEN));
+        assertEquals(true, pala2.osuuSeinaan(Suunta.OIKEA, 10, 20));
+        assertEquals(false, pala2.osuuSeinaan(Suunta.VASEN, 10, 20));
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

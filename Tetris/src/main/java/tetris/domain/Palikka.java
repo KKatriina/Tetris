@@ -31,8 +31,6 @@ public class Palikka {
     private Random random;
     private Color vari;
     
-   
-    
     public Palikka() {
         this.vari = blue;
         this.palat = new ArrayList<Pala>();
@@ -42,7 +40,7 @@ public class Palikka {
         this.paaPala = new Pala(5, 0);
 
         luoPalat(paaPala, lisaPaloja);
-        kaannaVastapaivaan();
+        kaannaVastapaivaan(5, 5);
         arvoVari();
     }
     
@@ -85,7 +83,6 @@ public class Palikka {
         while (i <= lisaPaloja + 2) {
             int suunta = random.nextInt(4);
             Suunta ksuunta = selvitaKiinnityssuunta(suunta);
-
             int indeksi = random.nextInt(palat.size());
             Pala kiinnitysPala = palat.get(indeksi);
             
@@ -155,8 +152,8 @@ public class Palikka {
     * @param   suunta   Suunta, johon palikkaa halutaan siirtää
     * 
     */
-    public void siirra(Suunta suunta) {
-        if (osuukoSeinaan(suunta)) {
+    public void siirra(Suunta suunta, int leveys, int korkeus) {
+        if (osuukoSeinaan(suunta, leveys, korkeus)) {
             return;
         } else {
             for (Pala p : palat) {
@@ -171,8 +168,8 @@ public class Palikka {
     * @param   suunta   Suunta, johon palikkaa halutaan siirtyvän
     * 
     */
-    public boolean osuukoSeinaan(Suunta suunta) {
-        return osuukoSeinaan(suunta, this.palat);
+    public boolean osuukoSeinaan(Suunta suunta, int leveys, int korkeus) {
+        return osuukoSeinaan(suunta, this.palat, leveys, korkeus);
     }
 
     /**
@@ -183,9 +180,9 @@ public class Palikka {
     * @param   palat    lista paloista, joita halutaan siirtää
     * 
     */
-    public boolean osuukoSeinaan(Suunta suunta, List<Pala> palat) {
+    public boolean osuukoSeinaan(Suunta suunta, List<Pala> palat, int leveys, int korkeus) {
         for (Pala p : palat) {
-            if (p.osuuSeinaan(suunta)) {
+            if (p.osuuSeinaan(suunta, leveys, korkeus)) {
                 return true; 
             }
         }
@@ -197,22 +194,24 @@ public class Palikka {
     * mikäli tämä muutos ei saa siirrä yhtään palikan palaa koordinaatiston ulkopuolelle
     * 
     */
-    public void kaannaVastapaivaan() {   
+    public void kaannaVastapaivaan(int lev, int kork) {   
+        pyoraytaPalikkaaKerran();
+
+        if (osuukoSeinaan(Suunta.VASEN, lev, kork)
+                || osuukoSeinaan(Suunta.OIKEA, lev, kork)
+                || osuukoSeinaan(Suunta.ALA, lev, kork)) {
+            for (int i = 1; i <= 3; i++) {
+                pyoraytaPalikkaaKerran();
+            }
+        } 
+    }
+    
+    public void pyoraytaPalikkaaKerran() {
         for (int i = 1; i < palat.size(); i++) {
             LisaPala pala = (LisaPala) palat.get(i);
             pala.asetaUusiPaaPala(palat.get(i - 1));
             pala.kaannaVastapaivaan();
         }
-
-        if (osuukoSeinaan(Suunta.VASEN) || osuukoSeinaan(Suunta.OIKEA) || osuukoSeinaan(Suunta.ALA)) {
-            for (int i = 1; i < palat.size(); i++) {
-                LisaPala pala = (LisaPala) palat.get(i);
-                pala.asetaUusiPaaPala(palat.get(i - 1));
-                for (int j = 1; j <= 3; j++) {
-                    pala.kaannaVastapaivaan();
-                }
-            }
-        } 
     }
     
     public Pala getPaaPala() {
@@ -234,31 +233,13 @@ public class Palikka {
         return this.vari;
     }
 
-    public void arvoVari() {
-        
+    public void arvoVari() {       
         int R = this.random.nextInt(256);
         int G = this.random.nextInt(256);
         int B = this.random.nextInt(256);
         Color randomVari = new Color(R, G, B);
         
         this.setVari(randomVari);
-        
-//        int arvottu = this.random.nextInt(7);
-//        if (arvottu == 5) {
-//            setVari(Color.YELLOW);
-//        }
-//        if (arvottu == 4) {
-//            setVari(Color.RED);
-//        }
-//        if (arvottu == 3) {
-//            setVari(Color.GREEN);
-//        }
-//        if (arvottu == 2) {
-//            setVari(Color.PINK);
-//        }
-//        if (arvottu == 1) {
-//            setVari(Color.orange);
-//        }
     }
     
     
