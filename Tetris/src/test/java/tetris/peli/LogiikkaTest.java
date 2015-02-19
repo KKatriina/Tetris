@@ -5,10 +5,11 @@
  */
 package tetris.peli;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,8 +25,8 @@ import static tetris.tetris.Suunta.VASEN;
  *
  * @author kkerokos
  */
-public class TetrisTest {
-    Tetris tetris;
+public class LogiikkaTest {
+    Logiikka tetris;
     Pala pala1;
     Pala pala2;
     Pala pala3;
@@ -33,7 +34,7 @@ public class TetrisTest {
     Palikka palikka;
     List<Pala> pohjanPalat;
     
-    public TetrisTest() {
+    public LogiikkaTest() {
     }
     
     @BeforeClass
@@ -46,7 +47,7 @@ public class TetrisTest {
     
     @Before
     public void setUp() {
-        tetris = new Tetris(10, 20);
+        tetris = new Logiikka(10, 20);
         pala1 = new Pala(8, 2);
         pala2 = new LisaPala(8, 3, Suunta.ALA, pala1);
         pala3 = new Pala(8, 4);
@@ -266,29 +267,6 @@ public class TetrisTest {
     }
     
     @Test
-    public void saadaNopeuttaToimiiIsollaSyotteella() {
-        tetris.setNopeus(201);
-        tetris.saadaNopeutta();
-        assertEquals(196, tetris.getNopeus());
-    }
-    
-    @Test
-    public void saadaNopeuttaToimiiKeskikokoisellaSyotteella() {
-        tetris.setNopeus(200);
-        tetris.saadaNopeutta();
-        assertEquals(198, tetris.getNopeus());
-    }
-    
-    @Test
-    public void saadaNopeuttaToimiiPienellaSyotteella() {
-        tetris.setNopeus(51);
-        tetris.saadaNopeutta();
-        assertEquals(50, tetris.getNopeus());
-        tetris.saadaNopeutta();
-        assertEquals(50, tetris.getNopeus());
-    }
-    
-    @Test
     public void luoPeliinUusiPalikkaLuoPalikanOikein() {
         tetris.setPalikka(palikka);
         tetris.luoPeliinUusiPalikka();
@@ -298,13 +276,13 @@ public class TetrisTest {
     
     @Test
     public void peliLoppuuJosUusiPalikkaOsuuPohjanPaloihin() {
+        Ajastin ajastin = new Ajastin();
+        tetris.setAjastin(ajastin);
         Pala pala5 = new Pala(5, 0);
         pohjanPalat.add(pala5);
         tetris.setPohjanPalat(pohjanPalat);
         tetris.luoPeliinUusiPalikka();
-        assertEquals(false, tetris.getJatkuu());
+        assertEquals(false, tetris.getAjastin().getJatkuu());
     }
     
-    
-
 }

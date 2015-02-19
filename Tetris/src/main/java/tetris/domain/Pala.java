@@ -93,6 +93,18 @@ public class Pala {
         }
     }
     
+    public boolean meneekoSeinanLapi(Suunta suunta, int leveys, int korkeus) {
+        if (suunta == Suunta.ALA) {
+            return (this.y > (korkeus - 2));
+        } else if (suunta == Suunta.OIKEA) {
+            return (this.x > (leveys - 1));
+        } else if (suunta == Suunta.VASEN) {
+            return (this.x < 0);
+        } else {
+            return (this.y < 0);
+        }
+    }
+    
     public void setVari(Color vari) {
         this.vari = vari;
     }

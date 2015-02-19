@@ -56,10 +56,35 @@ public class PalaTest {
     }
     
     @Test
-    public void osuuSeinaanToimii() {
-        Pala pala2 = new Pala(11, 3);
+    public void osuuSeinaanAntaaOikeinTrue() {
+        Pala pala2 = new Pala(9, 18);
         assertEquals(true, pala2.osuuSeinaan(Suunta.OIKEA, 10, 20));
+        assertEquals(true, pala2.osuuSeinaan(Suunta.ALA, 10, 20));
+        
+    }
+    
+        @Test
+    public void osuuSeinaanAntaaOikeinFalse() {
+        Pala pala2 = new Pala(8, 17);
+        assertEquals(false, pala2.osuuSeinaan(Suunta.OIKEA, 10, 20));
         assertEquals(false, pala2.osuuSeinaan(Suunta.VASEN, 10, 20));
+        assertEquals(false, pala2.osuuSeinaan(Suunta.ALA, 10, 20));
+        
+    }
+    
+    @Test
+    public void meneekoSeinanLapiAntaaOikeinFalse() {
+        Pala pala2 = new Pala(9, 18);
+        assertEquals(false, pala2.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
+        assertEquals(false, pala2.meneekoSeinanLapi(Suunta.VASEN, 10, 20));
+        assertEquals(false, pala2.meneekoSeinanLapi(Suunta.ALA, 10, 20));
+    }
+    
+        @Test
+    public void meneekoSeinanLapiAntaaOikeinTrue() {
+        Pala pala2 = new Pala(10, 19);
+        assertEquals(true, pala2.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
+        assertEquals(true, pala2.meneekoSeinanLapi(Suunta.ALA, 10, 20));
     }
 
 }

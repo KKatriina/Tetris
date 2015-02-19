@@ -147,9 +147,9 @@ public class PalikkaTest {
     
     @Test
     public void osuukoSeinaanToimiiOikein() {
-        Pala pala4 = new Pala(11, 3);
-        LisaPala pala5 = new LisaPala(11, 4, Suunta.ALA, pala4);
-        LisaPala pala6 = new LisaPala(12, 6, Suunta.VASEN, pala5);
+        Pala pala4 = new Pala(8, 3);
+        LisaPala pala5 = new LisaPala(8, 4, Suunta.ALA, pala4);
+        LisaPala pala6 = new LisaPala(9, 6, Suunta.VASEN, pala5);
         List<Pala> palat3 = new ArrayList<Pala>();
         palat3.add(pala4);
         palat3.add(pala5);
@@ -157,6 +157,20 @@ public class PalikkaTest {
         Palikka palikka3 = new Palikka(palat3, pala4);
         assertEquals(true, palikka3.osuukoSeinaan(Suunta.OIKEA, 10, 20));
         assertEquals(false, palikka3.osuukoSeinaan(Suunta.VASEN, 10, 20));
+    }
+    
+    @Test
+    public void meneekoSeinanLapiToimiiOikein() {
+        Pala pala4 = new Pala(9, 3);
+        LisaPala pala5 = new LisaPala(9, 4, Suunta.ALA, pala4);
+        LisaPala pala6 = new LisaPala(10, 6, Suunta.VASEN, pala5);
+        List<Pala> palat3 = new ArrayList<Pala>();
+        palat3.add(pala4);
+        palat3.add(pala5);
+        palat3.add(pala6);
+        Palikka palikka3 = new Palikka(palat3, pala4);
+        assertEquals(true, palikka3.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
+        assertEquals(false, palikka3.meneekoSeinanLapi(Suunta.VASEN, 10, 20));
     }
     
     @Test

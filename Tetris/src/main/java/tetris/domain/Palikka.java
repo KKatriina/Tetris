@@ -8,6 +8,7 @@ import java.awt.Color;
 import static java.awt.Color.blue;
 import tetris.domain.LisaPala;
 import tetris.domain.Pala;
+import tetris.peli.Logiikka;
 import java.util.*;
 import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;
@@ -197,9 +198,9 @@ public class Palikka {
     public void kaannaVastapaivaan(int lev, int kork) {   
         pyoraytaPalikkaaKerran();
 
-        if (osuukoSeinaan(Suunta.VASEN, lev, kork)
-                || osuukoSeinaan(Suunta.OIKEA, lev, kork)
-                || osuukoSeinaan(Suunta.ALA, lev, kork)) {
+        if (meneekoSeinanLapi(Suunta.VASEN, lev, kork)
+                || meneekoSeinanLapi(Suunta.OIKEA, lev, kork)
+                || meneekoSeinanLapi(Suunta.ALA, lev, kork)) {
             for (int i = 1; i <= 3; i++) {
                 pyoraytaPalikkaaKerran();
             }
@@ -240,6 +241,15 @@ public class Palikka {
         Color randomVari = new Color(R, G, B);
         
         this.setVari(randomVari);
+    }
+
+    public boolean meneekoSeinanLapi(Suunta suunta, int lev, int kork) {
+        for (Pala p : palat) {
+            if (p.meneekoSeinanLapi(suunta, lev, kork)) {
+                return true; 
+            }
+        }
+        return false;
     }
     
     

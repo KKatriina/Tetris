@@ -12,7 +12,8 @@ import tetris.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
 import tetris.domain.LisaPala;
 import tetris.domain.Pala;
-import tetris.peli.Tetris;
+import tetris.peli.Ajastin;
+import tetris.peli.Logiikka;
 import static tetris.tetris.Suunta.ALA;
 import static tetris.tetris.Suunta.OIKEA;
 import static tetris.tetris.Suunta.VASEN;
@@ -27,8 +28,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tetris peli = new Tetris(10, 20);
-        Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
+        
+        Logiikka logiikka = new Logiikka(10, 20);
+        Ajastin ajastin = new Ajastin();
+        logiikka.setAjastin(ajastin);
+        ajastin.setLogiikka(logiikka);
+        Kayttoliittyma kali = new Kayttoliittyma(logiikka, 20);
         SwingUtilities.invokeLater(kali);
         
 
@@ -40,8 +45,8 @@ public class Main {
             }
         }
  
-        peli.setPelikentta(kali.getKentta());
-        peli.start();
+        logiikka.getAjastin().setPelikentta(kali.getKentta());
+        logiikka.getAjastin().start();
        
        
     }

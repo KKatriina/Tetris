@@ -10,7 +10,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.peli.Tetris;
+import tetris.peli.Ajastin;
+import tetris.peli.Logiikka;
 
 /**
  *
@@ -22,22 +23,23 @@ import tetris.peli.Tetris;
  */
 public class Kayttoliittyma implements Runnable {
     private JFrame frame;
-    private Tetris peli;
+    private Logiikka logiikka;
     private int sivunPituus;
     private Pelikentta kentta;
     private Nappaimistonkuuntelija nk;
     
-    public Kayttoliittyma(Tetris peli, int sivunPituus) {
-        this.peli = peli;
+    public Kayttoliittyma(Logiikka logiikka, int sivunPituus) {
+        this.logiikka = logiikka;
         this.sivunPituus = sivunPituus;
     }
+
     
 
     @Override
     public void run() {
         frame = new JFrame("Tetris!");
-        int leveys = (peli.getLeveys() * sivunPituus) + 10;
-        int korkeus = (peli.getKorkeus() * sivunPituus) + 10;
+        int leveys = (logiikka.getLeveys() * sivunPituus) + 10;
+        int korkeus = (logiikka.getKorkeus() * sivunPituus) + 10;
  
         frame.setPreferredSize(new Dimension(leveys, korkeus));
  
@@ -50,11 +52,11 @@ public class Kayttoliittyma implements Runnable {
     }
     
     public void luoKomponentit(Container container) {
-        kentta = new Pelikentta(this.peli, this.sivunPituus);
+        kentta = new Pelikentta(this.logiikka, this.sivunPituus);
         
         container.add(kentta);
         
-        nk = new Nappaimistonkuuntelija(this.peli, kentta);
+        nk = new Nappaimistonkuuntelija(this.logiikka, kentta);
         frame.addKeyListener(nk);
     }
 

@@ -5,61 +5,42 @@
  */
 package tetris.peli;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
-import javax.swing.Timer;
+import java.util.ArrayList;
+import java.util.List;
+import tetris.domain.LisaPala;
 import tetris.domain.Pala;
 import tetris.domain.Palikka;
-import tetris.gui.Pelikentta;
 import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;
 import static tetris.tetris.Suunta.OIKEA;
 import static tetris.tetris.Suunta.VASEN;
-import static tetris.tetris.Suunta.YLA;
 
 /**
  *
  * @author kkerokos
  */
-
-/**
- * Luokka sisältää pelin varsinaiseen pelaamiseen liittyviä metodeja
- */
-public class Tetris extends Timer implements ActionListener {
+public class Logiikka {
     private Palikka palikka;
     private List<Pala> pohjanPalat;
     private int leveys;
     private int korkeus;
-    private Pelikentta kentta;
-    private boolean jatkuu;
-    private int nopeus = 1000;
-
+    private Ajastin ajastin = null;
     
-    public Tetris(int leveys, int korkeus) {
-        super(1000, null);
-        
-        this.palikka = new Palikka();
-        this.pohjanPalat = new ArrayList<Pala>();
+    
+    public Logiikka(int leveys, int korkeus) {
         this.leveys = leveys;
         this.korkeus = korkeus;
-        this.jatkuu = true;
-        
-        addActionListener(this);
-        setInitialDelay(1000);
+        this.palikka = new Palikka();
+        this.pohjanPalat = new ArrayList<Pala>();
+    }
+
+    
+    public void setAjastin(Ajastin ajastin) {
+        this.ajastin = ajastin;
     }
     
-    public void setPelikentta(Pelikentta kentta) {
-        this.kentta = kentta;
-    }
-    
-    
-    public Palikka getPalikka() {
-        return this.palikka;
-    }
-    
-    public List<Pala> getPohjanPalat() {
-        return this.pohjanPalat;
+    public Ajastin getAjastin() {
+        return this.ajastin;
     }
     
     public int getLeveys() {
@@ -70,52 +51,22 @@ public class Tetris extends Timer implements ActionListener {
         return this.korkeus;
     }
     
-    public int getNopeus() {
-        return this.nopeus;
-    }
-    
-    public void setNopeus(int n) {
-        this.nopeus = n;
-    }
-    
-    public boolean getJatkuu() {
-        return this.jatkuu;
-    }
 
-    /**
-    * Metodi siirtää pelin palikkaa yhden askeleen alaspäin koordinaatistossa,
-    * kutsuu pelikierroksenLoppu- metodia ja piirtää pelikentän uudestaan
-    *
-    * @param   e    tapahtuma, johon metodi reagoi  
-    */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (!jatkuu) {
-            return;
-        }
-        
-        pelikierroksenLoppu();
-        
-        this.palikka.siirra(Suunta.ALA, this.leveys, this.korkeus);       
-        
-        setDelay(nopeus);
-
-        kentta.paivita();
+    public Palikka getPalikka() {
+        return this.palikka;
     }
     
-    /**
-    * Metodi tarkistaa, osuuko palikka pohjaan, ja jos osuu,
-    * lisaa palikan palat pohjan paloihin, luo uuden palikan ja 
-    * saataa nopeutta. Jos pelikentan alin kerros tayttyy paloista,
-    * metodi poistaa alimman palakerroksen.
-    */
+    public List<Pala> getPohjanPalat() {
+        return this.pohjanPalat;
+    }
+    
     public void pelikierroksenLoppu() {
         if (osuuPohjaan()) {
             for (Pala p : palikka.getPalat()) {
                 this.pohjanPalat.add(p);
             }
             luoPeliinUusiPalikka();
-            saadaNopeutta();
+            ajastin.saadaNopeutta();
         }
         
         while (pohjaTaynna()) {
@@ -132,22 +83,9 @@ public class Tetris extends Timer implements ActionListener {
             
         for (Pala p : this.palikka.getPalat()) {
             if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
-                this.jatkuu = false;
+                this.ajastin.setJatkuu(false);
             }
        }
-    }
-    
-    /**
-    * Metodi pienentaa pelin nopeutta
-    */
-    public void saadaNopeutta() {
-        if (nopeus > 200) {
-            nopeus -= 5;
-        } else if (nopeus > 100) {
-            nopeus -= 2;
-        } else if (nopeus > 50) {
-            nopeus -= 1;
-        }
     }
     
     /**
@@ -168,6 +106,8 @@ public class Tetris extends Timer implements ActionListener {
             p.siirra(ALA);
         }
     }
+    
+    
 
     /**
     * Metodi kertoo, osuuko palikka koordinaatiston alareunaan tai pelikentällä oleviin
@@ -318,10 +258,4 @@ public class Tetris extends Timer implements ActionListener {
             }
         }
     }
-
-
-    
-    
-    
-    
 }

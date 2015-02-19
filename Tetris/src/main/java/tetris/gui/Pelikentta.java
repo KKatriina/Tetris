@@ -8,7 +8,8 @@ package tetris.gui;
 import tetris.domain.Pala;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import tetris.peli.Tetris;
+import tetris.peli.Ajastin;
+import tetris.peli.Logiikka;
 
 /**
  *
@@ -19,11 +20,11 @@ import tetris.peli.Tetris;
  * Luokka luo piirtoalustan ja piirtää sille pelissä tarvittavat palat ja palikan
  */
 public class Pelikentta extends JPanel {
-    private Tetris peli;
+    private Logiikka logiikka;
     private int sivunPituus;
     
-    public Pelikentta(Tetris peli, int sivunPituus) {
-        this.peli = peli;
+    public Pelikentta(Logiikka logiikka, int sivunPituus) {
+        this.logiikka = logiikka;
         this.sivunPituus = sivunPituus;
     }
     
@@ -47,12 +48,12 @@ public class Pelikentta extends JPanel {
         super.paintComponent(g);
 
         
-        for (Pala p : this.peli.getPalikka().getPalat()) {
+        for (Pala p : this.logiikka.getPalikka().getPalat()) {
             g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
         }
         
-        for (Pala p : this.peli.getPohjanPalat()) {
+        for (Pala p : this.logiikka.getPohjanPalat()) {
             g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
         }

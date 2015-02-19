@@ -8,7 +8,8 @@ package tetris.gui;
 import tetris.domain.Palikka;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tetris.peli.Tetris;
+import tetris.peli.Ajastin;
+import tetris.peli.Logiikka;
 import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;
 import static tetris.tetris.Suunta.OIKEA;
@@ -25,11 +26,11 @@ import static tetris.tetris.Suunta.YLA;
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
-    private Tetris peli;
+    private Logiikka logiikka;
     private Pelikentta kentta;
     
-    public Nappaimistonkuuntelija(Tetris peli, Pelikentta kentta) {
-        this.peli = peli;
+    public Nappaimistonkuuntelija(Logiikka logiikka, Pelikentta kentta) {
+        this.logiikka = logiikka;
         this.kentta = kentta;
     }
     
@@ -37,16 +38,16 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            peli.kaannaVastapaivaan();
+            logiikka.kaannaVastapaivaan();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            peli.siirraPalikkaa(Suunta.ALA);
+            logiikka.siirraPalikkaa(Suunta.ALA);
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            peli.siirraPalikkaa(Suunta.OIKEA);
+            logiikka.siirraPalikkaa(Suunta.OIKEA);
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            peli.siirraPalikkaa(Suunta.VASEN);
+            logiikka.siirraPalikkaa(Suunta.VASEN);
         }
         
         this.kentta.paivita();
