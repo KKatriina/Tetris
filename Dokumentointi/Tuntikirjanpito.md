@@ -9,5 +9,6 @@
 * 30.1. 1,5h, näppäimistönkuuntelijan ja pelikentän säätämistä
 * 4.2.  2h, toiminnallisuuden säätöä ja testejä
 * 6.2.  1,5h, värejä ja muuta pientä kivaa
-* 11.2. 1h, lähinnä testejä
-* 12.2. 1h, luokkakaavioita
+* 11.2. 2h, lähinnä testejä
+* 12.2. 1h, sekvenssikaavioita
+* 13.2. 3h, refaktorointia ja sekvenssikaavioita
