@@ -6,9 +6,6 @@
 package tetris.domain;
 import java.awt.Color;
 import static java.awt.Color.blue;
-import tetris.domain.LisaPala;
-import tetris.domain.Pala;
-import tetris.peli.Logiikka;
 import java.util.*;
 import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;

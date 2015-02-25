@@ -7,7 +7,6 @@ package tetris.peli;
 
 import java.util.ArrayList;
 import java.util.List;
-import tetris.domain.LisaPala;
 import tetris.domain.Pala;
 import tetris.domain.Palikka;
 import tetris.tetris.Suunta;

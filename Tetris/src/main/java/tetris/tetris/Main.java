@@ -5,18 +5,10 @@
  */
 package tetris.tetris;
 
-import java.util.ArrayList;
-import java.util.List;
-import tetris.domain.Palikka;
 import tetris.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
-import tetris.domain.LisaPala;
-import tetris.domain.Pala;
 import tetris.peli.Ajastin;
 import tetris.peli.Logiikka;
-import static tetris.tetris.Suunta.ALA;
-import static tetris.tetris.Suunta.OIKEA;
-import static tetris.tetris.Suunta.VASEN;
 
 /**
  *
@@ -45,8 +37,8 @@ public class Main {
             }
         }
  
-        logiikka.getAjastin().setPelikentta(kali.getKentta());
-        logiikka.getAjastin().start();
+        ajastin.setPelikentta(kali.getKentta());
+        ajastin.start();
        
        
     }

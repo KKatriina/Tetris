@@ -5,12 +5,11 @@
  */
 package tetris.gui;
 
-import tetris.domain.Palikka;
+
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.peli.Ajastin;
 import tetris.peli.Logiikka;
 
 /**

@@ -9,10 +9,7 @@ package tetris.domain;
 import java.awt.Color;
 import static java.awt.Color.blue;
 import tetris.tetris.Suunta;
-import static tetris.tetris.Suunta.ALA;
-import static tetris.tetris.Suunta.OIKEA;
-import static tetris.tetris.Suunta.VASEN;
-import static tetris.tetris.Suunta.YLA;
+
 
 /**
  *
