@@ -14,3 +14,4 @@
 * 19.2. 3h, refaktorointia ja sekvenssikaavioita
 * 23.2. 1h, koodikatselmointi
 * 25.2. 1h, dokumentaatiota
+* 26.2. 4h, raportointia, viimeistelyä ja demo
