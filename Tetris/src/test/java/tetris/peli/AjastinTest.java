@@ -32,18 +32,7 @@ public class AjastinTest {
     List<Pala> palalista;
     Palikka palikka;
     List<Pala> pohjanPalat;
-    
-    public AjastinTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+       
     @Before
     public void setUp() {
         tetris = new Ajastin();
@@ -56,15 +45,9 @@ public class AjastinTest {
         pohjanPalat = new ArrayList<Pala>();
         pohjanPalat.add(pala3);
         palikka = new Palikka(palalista, pala1);
-        
-        
+               
     }
-    
-    @After
-    public void tearDown() {
-    }
-    
-    
+
     @Test
     public void saadaNopeuttaToimiiIsollaSyotteella() {
         tetris.setNopeus(201);
@@ -87,9 +70,5 @@ public class AjastinTest {
         tetris.saadaNopeutta();
         assertEquals(50, tetris.getNopeus());
     }
-    
-
-    
-    
 
 }

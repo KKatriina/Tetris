@@ -20,26 +20,15 @@ import static tetris.tetris.Suunta.OIKEA;
  */
 public class PalaTest {
     Pala pala1;
+    Pala pala2;
     
-    public PalaTest() {
-        pala1 = new Pala(2, 5);
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
+        pala1 = new Pala(2, 5);
+        pala2 = new Pala(9, 18);
     }
     
-    @After
-    public void tearDown() {
-    }
     
     @Test
     public void palaSiirtyyOikein() {
@@ -56,35 +45,31 @@ public class PalaTest {
     }
     
     @Test
-    public void osuuSeinaanAntaaOikeinTrue() {
-        Pala pala2 = new Pala(9, 18);
+    public void osuuSeinaanAntaaOikeinTrue() {       
         assertEquals(true, pala2.osuuSeinaan(Suunta.OIKEA, 10, 20));
-        assertEquals(true, pala2.osuuSeinaan(Suunta.ALA, 10, 20));
-        
+        assertEquals(true, pala2.osuuSeinaan(Suunta.ALA, 10, 20));        
     }
     
-        @Test
+    @Test
     public void osuuSeinaanAntaaOikeinFalse() {
-        Pala pala2 = new Pala(8, 17);
-        assertEquals(false, pala2.osuuSeinaan(Suunta.OIKEA, 10, 20));
-        assertEquals(false, pala2.osuuSeinaan(Suunta.VASEN, 10, 20));
-        assertEquals(false, pala2.osuuSeinaan(Suunta.ALA, 10, 20));
-        
+        Pala pala3 = new Pala(8, 17);
+        assertEquals(false, pala3.osuuSeinaan(Suunta.OIKEA, 10, 20));
+        assertEquals(false, pala3.osuuSeinaan(Suunta.VASEN, 10, 20));
+        assertEquals(false, pala3.osuuSeinaan(Suunta.ALA, 10, 20));        
     }
     
     @Test
     public void meneekoSeinanLapiAntaaOikeinFalse() {
-        Pala pala2 = new Pala(9, 18);
         assertEquals(false, pala2.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
         assertEquals(false, pala2.meneekoSeinanLapi(Suunta.VASEN, 10, 20));
         assertEquals(false, pala2.meneekoSeinanLapi(Suunta.ALA, 10, 20));
     }
     
-        @Test
+    @Test
     public void meneekoSeinanLapiAntaaOikeinTrue() {
-        Pala pala2 = new Pala(10, 19);
-        assertEquals(true, pala2.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
-        assertEquals(true, pala2.meneekoSeinanLapi(Suunta.ALA, 10, 20));
+        Pala pala3 = new Pala(10, 19);
+        assertEquals(true, pala3.meneekoSeinanLapi(Suunta.OIKEA, 10, 20));
+        assertEquals(true, pala3.meneekoSeinanLapi(Suunta.ALA, 10, 20));
     }
 
 }

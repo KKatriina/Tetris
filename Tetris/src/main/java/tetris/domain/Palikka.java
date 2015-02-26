@@ -243,10 +243,10 @@ public class Palikka {
     * Metodi arpoo palikalle värikartalta värin
     */
     public void arvoVari() {       
-        int R = this.random.nextInt(256);
-        int G = this.random.nextInt(256);
-        int B = this.random.nextInt(256);
-        Color randomVari = new Color(R, G, B);
+        int variR = this.random.nextInt(256);
+        int variG = this.random.nextInt(256);
+        int variB = this.random.nextInt(256);
+        Color randomVari = new Color(variR, variG, variB);
         
         this.setVari(randomVari);
     }

@@ -89,7 +89,7 @@ public class Logiikka {
             if (this.palikka.osuvatkoPalatPaallekkain(this.pohjanPalat, p)) {
                 this.ajastin.setJatkuu(false);
             }
-       }
+        }
     }
     
     /**
@@ -222,7 +222,7 @@ public class Logiikka {
         return false;
     }
     
-        /**
+    /**
     * Metodi tarkistaa, osuuko yksi pala päällekkäin sen vasemmalla puolella olevien pohjan palojen kanssa, 
     * mikäli palaa siirretään yksi askel haluttuun suuntaan
     * 
@@ -233,7 +233,7 @@ public class Logiikka {
     public boolean osuukoPaloihinVasemmalla(Pala pala) {
         for (Pala p : this.pohjanPalat) {
             if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
-                    return true;
+                return true;
             }
         }
         return false;

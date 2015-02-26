@@ -26,28 +26,17 @@ import static tetris.tetris.Suunta.VASEN;
  * @author kkerokos
  */
 public class LogiikkaTest {
-    Logiikka tetris;
+    Logiikka logiikka;
     Pala pala1;
     Pala pala2;
     Pala pala3;
     List<Pala> palalista;
     Palikka palikka;
-    List<Pala> pohjanPalat;
-    
-    public LogiikkaTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    List<Pala> pohjanPalat;    
     
     @Before
     public void setUp() {
-        tetris = new Logiikka(10, 20);
+        logiikka = new Logiikka(10, 20);
         pala1 = new Pala(8, 2);
         pala2 = new LisaPala(8, 3, Suunta.ALA, pala1);
         pala3 = new Pala(8, 4);
@@ -57,96 +46,88 @@ public class LogiikkaTest {
         pohjanPalat = new ArrayList<Pala>();
         pohjanPalat.add(pala3);
         palikka = new Palikka(palalista, pala1);
-        
-        
     }
-    
-    @After
-    public void tearDown() {
-    }
-    
     
     @Test
     public void osuukoPohjaanAntaaOikeinFalse() {
-        this.tetris.setPohjanPalat(null);
-        assertEquals(false, tetris.osuuPohjaan());
-        
+        this.logiikka.setPohjanPalat(null);
+        assertEquals(false, logiikka.osuuPohjaan());     
     }
       
     @Test
     public void osuukoPohjaanAntaaOikeinTrueKunPohjanPalatTyhja() {
         Pala pala4 = new Pala(5, 18);
         Pala pala5 = new LisaPala(5, 19, ALA, pala4);
-        List<Pala> palat = new ArrayList<Pala>();
+        List<Pala> palat = new ArrayList<>();
         palat.add(pala4);
         palat.add(pala5);
         Palikka palikka2 = new Palikka(palat, pala4);
-        this.tetris.setPohjanPalat(null);
-        this.tetris.setPalikka(palikka2);
+        this.logiikka.setPohjanPalat(null);
+        this.logiikka.setPalikka(palikka2);
           
-        assertEquals(true, tetris.osuuPohjaan());
+        assertEquals(true, logiikka.osuuPohjaan());
     }
     
     @Test
     public void osuukoPohjaanAntaaOikeinTrue() {
         Pala pala4 = new Pala(5, 18);
         Pala pala5 = new LisaPala(5, 19, ALA, pala4);
-        List<Pala> palat = new ArrayList<Pala>();
+        List<Pala> palat = new ArrayList<>();
         palat.add(pala4);
         palat.add(pala5);
         Palikka palikka2 = new Palikka(palat, pala4);
-        this.tetris.setPalikka(palikka2);
+        this.logiikka.setPalikka(palikka2);
           
-        assertEquals(true, tetris.osuuPohjaan());
+        assertEquals(true, logiikka.osuuPohjaan());
     }
     
     @Test
     public void osuukoPohjanPaloihinAntaaOikeinTrue() {
-        tetris.setPohjanPalat(pohjanPalat);
-        assertEquals(true, tetris.osuukoPohjanPaloihin(pala2, ALA));
+        logiikka.setPohjanPalat(pohjanPalat);
+        assertEquals(true, logiikka.osuukoPohjanPaloihin(pala2, ALA));
     }
     
     
     @Test
     public void osuukoPohjanPaloihinAntaaOikeinFalse() {
-        tetris.setPohjanPalat(pohjanPalat);
-        assertEquals(false, tetris.osuukoPohjanPaloihin(pala2, VASEN));
+        logiikka.setPohjanPalat(pohjanPalat);
+        assertEquals(false, logiikka.osuukoPohjanPaloihin(pala2, VASEN));
     }
     
     @Test
     public void osuukoPohjanPaloihinToimiiKunParametrinaSuunta() {
-        tetris.setPohjanPalat(pohjanPalat);
-        tetris.setPalikka(palikka);
-        assertEquals(false, tetris.osuukoPohjanPaloihin(VASEN));
-        assertEquals(true, tetris.osuukoPohjanPaloihin(ALA));
-        assertEquals(false, tetris.osuukoPohjanPaloihin(OIKEA));
+        logiikka.setPohjanPalat(pohjanPalat);
+        logiikka.setPalikka(palikka);
+        assertEquals(false, logiikka.osuukoPohjanPaloihin(VASEN));
+        assertEquals(true, logiikka.osuukoPohjanPaloihin(ALA));
+        assertEquals(false, logiikka.osuukoPohjanPaloihin(OIKEA));
     }
     
     @Test
     public void siirraPalikkaaSiirtaaOikein() {
-        tetris.setPalikka(palikka);
-        tetris.siirraPalikkaa(ALA);
+        logiikka.setPalikka(palikka);
+        logiikka.siirraPalikkaa(ALA);
         assertEquals(8, pala2.getX());
         assertEquals(4, pala2.getY());
     }
     
     @Test
     public void siirraPalikkaaEiSiirraJosOsuuPohjanPaloihin() {
-        tetris.setPalikka(palikka);
+        logiikka.setPalikka(palikka);
         Pala pala6 = new Pala(8, 4);
         List<Pala> pohjanPalat2 = new ArrayList<Pala>();
         pohjanPalat2.add(pala6);
-        tetris.setPohjanPalat(pohjanPalat2);
-        tetris.siirraPalikkaa(ALA);
+        logiikka.setPohjanPalat(pohjanPalat2);
+        logiikka.siirraPalikkaa(ALA);
         assertEquals(8, pala2.getX());
         assertEquals(3, pala2.getY());
     }
     
     @Test
     public void pohjaTaynnaAntaaOikeinFalse() {
-        tetris.setPalikka(palikka);
-        tetris.setPohjanPalat(pohjanPalat);
-        assertEquals(false, tetris.pohjaTaynna());
+        logiikka.setPalikka(palikka);
+        logiikka.setPohjanPalat(pohjanPalat);
+        assertEquals(false, logiikka.pohjaTaynna());
     }
     
     @Test
@@ -155,8 +136,8 @@ public class LogiikkaTest {
             Pala pp = new Pala(i, 18);
             pohjanPalat.add(pp);
         }
-        tetris.setPohjanPalat(pohjanPalat);
-        assertEquals(true, tetris.pohjaTaynna());            
+        logiikka.setPohjanPalat(pohjanPalat);
+        assertEquals(true, logiikka.pohjaTaynna());            
     }
     
     @Test
@@ -165,9 +146,10 @@ public class LogiikkaTest {
             Pala pp = new Pala(i, 19);
             pohjanPalat.add(pp);
         }
-        tetris.setPohjanPalat(pohjanPalat);
-        tetris.alinRiviPois();
-        assertEquals(1, tetris.getPohjanPalat().size());
+        logiikka.setPohjanPalat(pohjanPalat);
+        logiikka.alinRiviPois();
+        
+        assertEquals(1, logiikka.getPohjanPalat().size());
         assertEquals(5, pala3.getY());
         assertEquals(8, pala3.getX());
     }
@@ -183,9 +165,11 @@ public class LogiikkaTest {
         Pala pala6 = new Pala(8, 19);
         List<Pala> pohja3 = new ArrayList<Pala>();
         pohja3.add(pala6);
-        tetris.pelikierroksenLoppu();
-        assertEquals(5, tetris.getPalikka().getPaaPala().getX());
-        assertEquals(0, tetris.getPalikka().getPaaPala().getY());
+
+        logiikka.pelikierroksenLoppu();
+        
+        assertEquals(5, logiikka.getPalikka().getPaaPala().getX());
+        assertEquals(0, logiikka.getPalikka().getPaaPala().getY());
     }
     
     @Test
@@ -201,9 +185,11 @@ public class LogiikkaTest {
         Pala pala7 = new Pala(6, 2);
         List<Pala> pohja3 = new ArrayList<Pala>();
         pohja3.add(pala7);
-        tetris.setPalikka(palikka3);
-        tetris.setPohjanPalat(pohja3);
-        tetris.kaannaVastapaivaan();
+        
+        logiikka.setPalikka(palikka3);
+        logiikka.setPohjanPalat(pohja3);
+        logiikka.kaannaVastapaivaan();
+        
         assertEquals(5, pala5.getX());
         assertEquals(3, pala5.getY());
         assertEquals(6, pala6.getX());
@@ -223,9 +209,11 @@ public class LogiikkaTest {
         Pala pala7 = new Pala(7, 2);
         List<Pala> pohja3 = new ArrayList<Pala>();
         pohja3.add(pala7);
-        tetris.setPalikka(palikka3);
-        tetris.setPohjanPalat(pohja3);
-        tetris.kaannaVastapaivaan();
+        
+        logiikka.setPalikka(palikka3);
+        logiikka.setPohjanPalat(pohja3);
+        logiikka.kaannaVastapaivaan();
+        
         assertEquals(6, pala5.getX());
         assertEquals(2, pala5.getY());
         assertEquals(6, pala6.getX());
@@ -242,10 +230,12 @@ public class LogiikkaTest {
         pohja4.add(pala6);
         pohja4.add(pala5);
         pohja4.add(pala7);
-        tetris.setPohjanPalat(pohja4);
-        assertEquals(true, tetris.osuukoPaloihinVasemmalla(pala4));
-        assertEquals(true, tetris.osuukoPaloihinAlhaalla(pala4));
-        assertEquals(true, tetris.osuukoPaloihinOikealla(pala4));
+        
+        logiikka.setPohjanPalat(pohja4);
+        
+        assertEquals(true, logiikka.osuukoPaloihinVasemmalla(pala4));
+        assertEquals(true, logiikka.osuukoPaloihinAlhaalla(pala4));
+        assertEquals(true, logiikka.osuukoPaloihinOikealla(pala4));
         
     }
     
@@ -259,30 +249,32 @@ public class LogiikkaTest {
         pohja4.add(pala6);
         pohja4.add(pala5);
         pohja4.add(pala7);
-        tetris.setPohjanPalat(pohja4);
-        assertEquals(false, tetris.osuukoPaloihinVasemmalla(pala4));
-        assertEquals(false, tetris.osuukoPaloihinAlhaalla(pala4));
-        assertEquals(false, tetris.osuukoPaloihinOikealla(pala4));
         
+        logiikka.setPohjanPalat(pohja4);
+        
+        assertEquals(false, logiikka.osuukoPaloihinVasemmalla(pala4));
+        assertEquals(false, logiikka.osuukoPaloihinAlhaalla(pala4));
+        assertEquals(false, logiikka.osuukoPaloihinOikealla(pala4));       
     }
     
     @Test
     public void luoPeliinUusiPalikkaLuoPalikanOikein() {
-        tetris.setPalikka(palikka);
-        tetris.luoPeliinUusiPalikka();
-        assertEquals(5, tetris.getPalikka().getPaaPala().getX());
-        assertEquals(0, tetris.getPalikka().getPaaPala().getY());
+        logiikka.luoPeliinUusiPalikka();
+        assertEquals(5, logiikka.getPalikka().getPaaPala().getX());
+        assertEquals(0, logiikka.getPalikka().getPaaPala().getY());
     }
     
     @Test
     public void peliLoppuuJosUusiPalikkaOsuuPohjanPaloihin() {
         Ajastin ajastin = new Ajastin();
-        tetris.setAjastin(ajastin);
+        logiikka.setAjastin(ajastin);
         Pala pala5 = new Pala(5, 0);
         pohjanPalat.add(pala5);
-        tetris.setPohjanPalat(pohjanPalat);
-        tetris.luoPeliinUusiPalikka();
-        assertEquals(false, tetris.getAjastin().getJatkuu());
+        
+        logiikka.setPohjanPalat(pohjanPalat);
+        logiikka.luoPeliinUusiPalikka();
+        
+        assertEquals(false, logiikka.getAjastin().getJatkuu());
     }
     
 }
