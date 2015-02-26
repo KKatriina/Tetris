@@ -189,6 +189,14 @@ public class Logiikka {
         return false;
     }
     
+    /**
+    * Metodi tarkistaa, osuuko yksi pala päällekkäin sen alapuolella olevien pohjan palojen kanssa, 
+    * mikäli palaa siirretään yksi askel haluttuun suuntaan
+    * 
+    * @param    pala    Pala, jota ollaan liikuttamassa
+    * @return           true, jos pala osuu siirrettäessä päällekkäin sen alapuolella
+    *                   olevien pohjan palojen kanssa, muuten false
+    */
     public boolean osuukoPaloihinAlhaalla(Pala pala) {
         for (Pala p : this.pohjanPalat) {
             if ((p.getY() == pala.getY() + 1) && (pala.getX() == p.getX())) {
@@ -198,6 +206,14 @@ public class Logiikka {
         return false;
     }
     
+        /**
+    * Metodi tarkistaa, osuuko yksi pala päällekkäin sen oikealla puolella olevien pohjan palojen kanssa, 
+    * mikäli palaa siirretään yksi askel haluttuun suuntaan
+    * 
+    * @param    pala    Pala, jota ollaan liikuttamassa
+    * @return           true, jos pala osuu siirrettäessä päällekkäin sen oikealla puolella
+    *                   olevien pohjan palojen kanssa, muuten false
+    */
     public boolean osuukoPaloihinOikealla(Pala pala) {
         for (Pala p : this.pohjanPalat) {
             if ((p.getY() == pala.getY()) && (pala.getX() + 1 == p.getX())) {
@@ -207,6 +223,14 @@ public class Logiikka {
         return false;
     }
     
+        /**
+    * Metodi tarkistaa, osuuko yksi pala päällekkäin sen vasemmalla puolella olevien pohjan palojen kanssa, 
+    * mikäli palaa siirretään yksi askel haluttuun suuntaan
+    * 
+    * @param    pala    Pala, jota ollaan liikuttamassa
+    * @return           true, jos pala osuu siirrettäessä päällekkäin sen vasemmalla puolella
+    *                   olevien pohjan palojen kanssa, muuten false
+    */
     public boolean osuukoPaloihinVasemmalla(Pala pala) {
         for (Pala p : this.pohjanPalat) {
             if ((p.getY() == pala.getY()) && (pala.getX() - 1 == p.getX())) {
@@ -214,9 +238,7 @@ public class Logiikka {
             }
         }
         return false;
-    }
-    
-    
+    }   
     
     /**
     * Metodi kertoo, onko pelikentän alin palarivi täynnä
