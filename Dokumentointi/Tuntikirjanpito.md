@@ -11,4 +11,6 @@
 * 6.2.  1,5h, värejä ja muuta pientä kivaa
 * 11.2. 2h, lähinnä testejä
 * 12.2. 1h, sekvenssikaavioita
-* 13.2. 3h, refaktorointia ja sekvenssikaavioita
+* 19.2. 3h, refaktorointia ja sekvenssikaavioita
+* 23.2. 1h, koodikatselmointi
+* 25.2. 1h, dokumentaatiota
