@@ -59,6 +59,12 @@ public class Logiikka {
         return this.pohjanPalat;
     }
     
+        /**
+    * Metodi tarkistaa, osuuko palikka pohjaan, ja jos osuu,
+    * lisaa palikan palat pohjan paloihin, luo uuden palikan ja 
+    * saataa nopeutta. Jos pelikentan alin kerros tayttyy paloista,
+    * metodi poistaa alimman palakerroksen.
+    */
     public void pelikierroksenLoppu() {
         if (osuuPohjaan()) {
             for (Pala p : palikka.getPalat()) {
@@ -92,7 +98,7 @@ public class Logiikka {
     * pohjan palikoita yhden askeleen alaspäin
     */
     public void alinRiviPois() {
-        ArrayList<Pala> poistettavat = new ArrayList<Pala>();
+        ArrayList<Pala> poistettavat = new ArrayList<>();
         for (Pala p : pohjanPalat) {
             if (p.getY() >= (this.korkeus - 1)) {
                 poistettavat.add(p);
@@ -107,13 +113,9 @@ public class Logiikka {
     }
     
     
-
     /**
     * Metodi kertoo, osuuko palikka koordinaatiston alareunaan tai pelikentällä oleviin
     * paloihin.
-    *
-    * @param   palikka  pelissä aktiivisena oleva palikka
-    * @param   pohjanPalat  pelikentällä olevat palat
     * 
     * @return       true jos palikka osuu koordinaatiston alareunaan tai pelikentällä oleviin paloihin, muuten false
     */
@@ -126,14 +128,16 @@ public class Logiikka {
             
             if (osuukoPohjanPaloihin(p, ALA)) {
                 palautettava = true;
-            }
-            
+            }           
         }
         return palautettava;
     }
     
     /**
-    * Metodi kertoo, osuuko pelin palikka pohjan paloihin
+    * Metodi kertoo, osuuko pelin palikka siirrettäessä pohjan paloihin
+    
+    * @param suunta     suunta, johon palikkaa halutaan siirtää
+    * @return           true, jos pelin palikka osuu siirrettäessä pohjan paloihin, muuten false
     */
     public boolean osuukoPohjanPaloihin(Suunta suunta) {
         for (Pala p : this.palikka.getPalat()) {
@@ -148,6 +152,8 @@ public class Logiikka {
     /**
     * Metodi siirtää pelin palikkaa haluttuun suuntaan, mikäli tämä ei siirrä
     * palikkaa päällekkäin pohjan palojen kanssa 
+    * 
+    * @param suunta     suunta, johon palikkaa halutaan siirtää
     */
     public void siirraPalikkaa(Suunta suunta) {
         if (!(osuukoPohjanPaloihin(suunta))) {
@@ -161,6 +167,8 @@ public class Logiikka {
     * 
     * @param    pala    Pala, jota ollaan liikuttamassa
     * @param    suunta  Suunta, johon palaa ollaan liikuttamassa 
+    * @return           true, jos pala osuu siirrettäessä päällekkäin pohjan palojen kanssa,
+    *                   muuten false
     */
     public boolean osuukoPohjanPaloihin(Pala pala, Suunta suunta) {
         if (this.pohjanPalat == null) {

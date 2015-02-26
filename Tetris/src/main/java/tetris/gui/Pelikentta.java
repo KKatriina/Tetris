@@ -8,7 +8,6 @@ package tetris.gui;
 import tetris.domain.Pala;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import tetris.peli.Ajastin;
 import tetris.peli.Logiikka;
 
 /**
@@ -30,24 +29,15 @@ public class Pelikentta extends JPanel {
     
     /**
     * Metodi piirtää pelikentän uudestaan
-    * 
     */
     public void paivita() {
         this.repaint();
     }
     
-    /**
-    * Metodi piirtää pelikentälle palikkaan ja pohjan paloihin 
-    * kuuluvat palat samankokoisina neliöinä
-    *
-    * @param   g    Graphics
-    * 
-    */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        
+       
         for (Pala p : this.logiikka.getPalikka().getPalat()) {
             g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
@@ -56,8 +46,6 @@ public class Pelikentta extends JPanel {
         for (Pala p : this.logiikka.getPohjanPalat()) {
             g.setColor(p.getVari());
             g.fill3DRect(sivunPituus * p.getX(), sivunPituus * p.getY(), sivunPituus, sivunPituus, true);
-        }
-        
-    
+        }          
     }
 }

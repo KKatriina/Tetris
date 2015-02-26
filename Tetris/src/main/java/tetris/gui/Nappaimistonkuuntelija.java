@@ -4,17 +4,11 @@
  * and open the template in the editor.
  */
 package tetris.gui;
-
-import tetris.domain.Palikka;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tetris.peli.Ajastin;
 import tetris.peli.Logiikka;
 import tetris.tetris.Suunta;
-import static tetris.tetris.Suunta.ALA;
-import static tetris.tetris.Suunta.OIKEA;
-import static tetris.tetris.Suunta.VASEN;
-import static tetris.tetris.Suunta.YLA;
+
 
 /**
  *
@@ -25,7 +19,6 @@ import static tetris.tetris.Suunta.YLA;
  * Luokka kuuntelee nuolinäppäimiä ja siirtää ja kääntää pelin palikkaa painetun nuolinäppäimen mukaisesti
  */
 public class Nappaimistonkuuntelija implements KeyListener {
-
     private Logiikka logiikka;
     private Pelikentta kentta;
     
@@ -34,7 +27,6 @@ public class Nappaimistonkuuntelija implements KeyListener {
         this.kentta = kentta;
     }
     
-
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -53,17 +45,13 @@ public class Nappaimistonkuuntelija implements KeyListener {
         this.kentta.paivita();
     }
     
-
     @Override
-    public void keyTyped(KeyEvent e) {
-        
+    public void keyTyped(KeyEvent e) {    
     }
 
 
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
-
     
 }

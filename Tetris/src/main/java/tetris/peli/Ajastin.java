@@ -7,16 +7,9 @@ package tetris.peli;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import javax.swing.Timer;
-import tetris.domain.Pala;
-import tetris.domain.Palikka;
 import tetris.gui.Pelikentta;
-import tetris.tetris.Suunta;
 import static tetris.tetris.Suunta.ALA;
-import static tetris.tetris.Suunta.OIKEA;
-import static tetris.tetris.Suunta.VASEN;
-import static tetris.tetris.Suunta.YLA;
 
 /**
  *
@@ -37,8 +30,7 @@ public class Ajastin extends Timer implements ActionListener {
         super(1000, null);
 
         this.jatkuu = true;
-
-        
+    
         addActionListener(this);
         setInitialDelay(1000);
     }
@@ -46,8 +38,7 @@ public class Ajastin extends Timer implements ActionListener {
     public void setLogiikka(Logiikka logiikka) {
         this.logiikka = logiikka;
     }
-    
-    
+        
     public void setPelikentta(Pelikentta kentta) {
         this.kentta = kentta;
     }
@@ -67,17 +58,7 @@ public class Ajastin extends Timer implements ActionListener {
     public boolean getJatkuu() {
         return this.jatkuu;
     }
-    
-    
-    
 
-
-    /**
-    * Metodi siirtää pelin palikkaa yhden askeleen alaspäin koordinaatistossa,
-    * kutsuu pelikierroksenLoppu- metodia ja piirtää pelikentän uudestaan
-    *
-    * @param   e    tapahtuma, johon metodi reagoi  
-    */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!jatkuu) {
@@ -91,15 +72,7 @@ public class Ajastin extends Timer implements ActionListener {
 
         kentta.paivita();
     }
-    
-    /**
-    * Metodi tarkistaa, osuuko palikka pohjaan, ja jos osuu,
-    * lisaa palikan palat pohjan paloihin, luo uuden palikan ja 
-    * saataa nopeutta. Jos pelikentan alin kerros tayttyy paloista,
-    * metodi poistaa alimman palakerroksen.
-    */
-
-    
+        
     /**
     * Metodi pienentaa pelin nopeutta
     */

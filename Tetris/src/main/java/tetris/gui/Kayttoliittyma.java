@@ -50,6 +50,11 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
     
+    /**
+    * Metodi luo käyttöliittymän komponentit
+    * 
+    * @param    container   käyttöliittymän komponenttien säiliö
+    */
     public void luoKomponentit(Container container) {
         kentta = new Pelikentta(this.logiikka, this.sivunPituus);
         

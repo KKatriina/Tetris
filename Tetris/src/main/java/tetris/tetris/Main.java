@@ -15,12 +15,8 @@ import tetris.peli.Logiikka;
  * @author kkerokos
  */
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
+    
+    public static void main(String[] args) {    
         Logiikka logiikka = new Logiikka(10, 20);
         Ajastin ajastin = new Ajastin();
         logiikka.setAjastin(ajastin);
@@ -28,7 +24,6 @@ public class Main {
         Kayttoliittyma kali = new Kayttoliittyma(logiikka, 20);
         SwingUtilities.invokeLater(kali);
         
-
         while (kali.getKentta() == null) {
             try {
                 Thread.sleep(100);
@@ -38,9 +33,7 @@ public class Main {
         }
  
         ajastin.setPelikentta(kali.getKentta());
-        ajastin.start();
-       
-       
+        ajastin.start();       
     }
     
 }

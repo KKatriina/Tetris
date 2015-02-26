@@ -34,6 +34,10 @@ public class LisaPala extends Pala {
         return this.ksuunta;
     }      
     
+    /**
+    * Metodi kiertää lisäpalaa 90 astetta vastapäivään sen palan suhteen, 
+    * johon lisäpala on kiinnittynyt
+    */
     public void kaannaVastapaivaan() {
         int uusiX = this.pala.getX();
         int uusiY = this.pala.getY();
@@ -58,7 +62,7 @@ public class LisaPala extends Pala {
         return this.pala;
     }
 
-    public void asetaUusiPaaPala(Pala pala) {
+    public void setPaaPala(Pala pala) {
         this.pala = pala;
     }
 }

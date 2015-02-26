@@ -35,7 +35,6 @@ public class Pala {
     * ottamatta huomioon seiniin tai toisiin palikoihin törmäämistä
     *
     * @param   suunta   suunta, johon palaa halutaan siirtää koordinaatistossa
-    * 
     */
     public void siirra(Suunta suunta) {
         if (suunta == Suunta.OIKEA) {
@@ -55,7 +54,6 @@ public class Pala {
     *
     * @param   uusiX    haluttu uusi x-koordinaatti
     * @param   uusiY    haluttu uusi y-koordinaatti
-    * 
     */
     public void siirra(int uusiX, int uusiY) {
         this.x = uusiX;
@@ -72,11 +70,13 @@ public class Pala {
 
     /**
     * Metodi tarkistaa, voiko palaa siirtää haluttuun suuntaan
-    * ilman että palan koordinaatit osuvat koordinaatiston ulkopuolelle
+    * ilman että pala osuu pelikentän seinään
     *
     * @param   suunta   suunta, johon palaa aiotaan siirtää
+    * @param   leveys   pelikentän leveys
+    * @param   korkeus  pelikentän korkeus
     * 
-    * @return           true, jos palaa voidaan siirtää koordinaatistossa
+    * @return           true, jos pala osuu siirrettäessä seinään, muuten false
     */
     public boolean osuuSeinaan(Suunta suunta, int leveys, int korkeus) {
         if (suunta == Suunta.ALA) {
@@ -90,6 +90,16 @@ public class Pala {
         }
     }
     
+    /**
+    * Metodi tarkistaa, voiko palaa siirtää haluttuun suuntaan
+    * ilman että pala osuu pelikentän seinien ulkopuolelle
+    *
+    * @param   suunta   suunta, johon palaa aiotaan siirtää
+    * @param   leveys   pelikentän leveys
+    * @param   korkeus  pelikentän korkeus
+    * 
+    * @return           true, jos pala osuu siirrettäessä pelikentän ulkopuolelle, muuten false
+    */
     public boolean meneekoSeinanLapi(Suunta suunta, int leveys, int korkeus) {
         if (suunta == Suunta.ALA) {
             return (this.y > (korkeus - 2));
