@@ -15,8 +15,7 @@ import static tetris.tetris.Suunta.OIKEA;
 import static tetris.tetris.Suunta.VASEN;
 
 /**
- *
- * @author kkerokos
+ * Luokka tarjoaa metodeja pelin palikan ja palojen liikuttamiseen pelikentällä
  */
 public class Logiikka {
     private Palikka palikka;
